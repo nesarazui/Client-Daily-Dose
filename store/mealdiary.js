@@ -1,28 +1,28 @@
-import Axios from 'axios';
-
+import Axios from "axios";
+import { DOMAIN_URL } from "../constants/domain";
 //ACTION TYPE
-const GET_DISHESBYDATE = 'GET_DISHESBYDATE';
+const GET_DISHESBYDATE = "GET_DISHESBYDATE";
 
-const GET_NUTRITION_INFO = 'GET_NUTRITION_INFO';
+const GET_NUTRITION_INFO = "GET_NUTRITION_INFO";
 
-const DEPOSIT_DISH_INFO = 'DEPOSIT_DISH_INFO';
+const DEPOSIT_DISH_INFO = "DEPOSIT_DISH_INFO";
 
 //ACTION CREATOR
-const getDishesByDate = dishes => {
+const getDishesByDate = (dishes) => {
   return {
     type: GET_DISHESBYDATE,
     dishes,
   };
 };
 
-const getNutritionInfo = dishObj => {
+const getNutritionInfo = (dishObj) => {
   return {
     type: GET_NUTRITION_INFO,
     dishObj,
   };
 };
 
-export const depositDishInfo = dish => {
+export const depositDishInfo = (dish) => {
   return {
     type: DEPOSIT_DISH_INFO,
     dish,
@@ -30,11 +30,12 @@ export const depositDishInfo = dish => {
 };
 
 //THUNK
-export const fetchDishes = date => {
-  return async dispatch => {
+export const fetchDishes = (date) => {
+  return async (dispatch) => {
     try {
       const { data } = await Axios.get(
-        `https://daily-dose-server.herokuapp.com/api/userDish/${date}`
+        // `https://daily-dose-server.herokuapp.com/api/userDish/${date}`
+        `http://${DOMAIN_URL}/api/userDish/${date}`
       );
       dispatch(getDishesByDate(data));
     } catch (error) {
@@ -43,11 +44,12 @@ export const fetchDishes = date => {
   };
 };
 
-export const fetchIngreInfo = dishId => {
-  return async dispatch => {
+export const fetchIngreInfo = (dishId) => {
+  return async (dispatch) => {
     try {
       const { data } = await Axios.get(
-        `https://daily-dose-server.herokuapp.com/api/userDish/dishIngredient/${dishId}`
+        // `https://daily-dose-server.herokuapp.com/api/userDish/dishIngredient/${dishId}`
+        `http://${DOMAIN_URL}/api/userDish/dishIngredient/${dishId}`
       );
       const ingreArr = data[0].dish.ingredients;
       dispatch(getNutritionInfo(ingreArr));
@@ -57,11 +59,12 @@ export const fetchIngreInfo = dishId => {
   };
 };
 
-export const removeDish = id => {
-  return async dispatch => {
+export const removeDish = (id) => {
+  return async (dispatch) => {
     try {
       const { data } = await Axios.delete(
-        `https://daily-dose-server.herokuapp.com/api/userDish/${id}`
+        //`https://daily-dose-server.herokuapp.com/api/userDish/${id}`
+        `http://${DOMAIN_URL}/api/userDish/${id}`
       );
       return await dispatch(fetchDishes(data.date));
     } catch (error) {
@@ -87,29 +90,29 @@ const reducer = (state = initialState, action) => {
     case GET_DISHESBYDATE:
       let clonedState = { ...state };
       let dishes = action.dishes;
-      let breakfastcloned = dishes.filter(obj => {
-        if (obj.mealType === 'Breakfast') {
+      let breakfastcloned = dishes.filter((obj) => {
+        if (obj.mealType === "Breakfast") {
           return true;
         } else {
           return false;
         }
       });
-      let lunchcloned = dishes.filter(obj => {
-        if (obj.mealType === 'Lunch') {
+      let lunchcloned = dishes.filter((obj) => {
+        if (obj.mealType === "Lunch") {
           return true;
         } else {
           return false;
         }
       });
-      let dinnercloned = dishes.filter(obj => {
-        if (obj.mealType === 'Dinner') {
+      let dinnercloned = dishes.filter((obj) => {
+        if (obj.mealType === "Dinner") {
           return true;
         } else {
           return false;
         }
       });
-      let snackcloned = dishes.filter(obj => {
-        if (obj.mealType === 'Snack') {
+      let snackcloned = dishes.filter((obj) => {
+        if (obj.mealType === "Snack") {
           return true;
         } else {
           return false;

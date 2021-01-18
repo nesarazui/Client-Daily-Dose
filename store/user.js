@@ -1,7 +1,8 @@
-import axios from 'axios';
+import axios from "axios";
+import { DOMAIN_URL } from "../constants/domain";
 
-const GET_USER = 'GET_USER';
-const REMOVE_USER = 'REMOVE_USER';
+const GET_USER = "GET_USER";
+const REMOVE_USER = "REMOVE_USER";
 
 const getUser = (user, error) => ({
   type: GET_USER,
@@ -13,10 +14,11 @@ const removeUser = () => ({
   type: REMOVE_USER,
 });
 
-export const me = () => async dispatch => {
+export const me = () => async (dispatch) => {
   try {
     const { data } = await axios.get(
-      'https://daily-dose-server.herokuapp.com/auth/me'
+      // 'https://daily-dose-server.herokuapp.com/auth/me'
+      `http://${DOMAIN_URL}/auth/me`
     );
     dispatch(getUser(data || defaultUser));
   } catch (err) {
@@ -25,11 +27,12 @@ export const me = () => async dispatch => {
 };
 
 export const login = (email, password) => {
-  return async dispatch => {
+  return async (dispatch) => {
     let res;
     try {
       res = await axios.post(
-        'https://daily-dose-server.herokuapp.com/auth/login',
+        // 'https://daily-dose-server.herokuapp.com/auth/login',
+        `http://${DOMAIN_URL}/auth/login`,
         {
           email,
           password,
@@ -46,12 +49,13 @@ export const login = (email, password) => {
   };
 };
 
-export const signup = userInfo => {
-  return async dispatch => {
+export const signup = (userInfo) => {
+  return async (dispatch) => {
     let res;
     try {
       res = await axios.post(
-        `https://daily-dose-server.herokuapp.com/auth/signup`,
+        // `https://daily-dose-server.herokuapp.com/auth/signup`,
+        `http://${DOMAIN_URL}/auth/signup`,
         userInfo
       );
     } catch (authError) {
@@ -66,12 +70,13 @@ export const signup = userInfo => {
   };
 };
 
-export const editProfile = userInfo => {
-  return async dispatch => {
+export const editProfile = (userInfo) => {
+  return async (dispatch) => {
     let res;
     try {
       res = await axios.put(
-        `https://daily-dose-server.herokuapp.com/auth/editProfile`,
+        // `https://daily-dose-server.herokuapp.com/auth/editProfile`,
+        `http://${DOMAIN_URL}/auth/editProfile`,
         userInfo
       );
     } catch (authError) {
@@ -85,9 +90,10 @@ export const editProfile = userInfo => {
   };
 };
 
-export const logout = () => async dispatch => {
+export const logout = () => async (dispatch) => {
   try {
-    await axios.post('https://daily-dose-server.herokuapp.com/auth/logout');
+    // await axios.post("https://daily-dose-server.herokuapp.com/auth/logout");
+    await axios.post(`http://${DOMAIN_URL}/auth/logout`);
     dispatch(removeUser());
   } catch (err) {
     console.error(err);

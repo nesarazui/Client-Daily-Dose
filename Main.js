@@ -1,19 +1,19 @@
-import * as React from 'react';
-import { connect } from 'react-redux';
-import { Platform, StatusBar, StyleSheet, View, Button } from 'react-native';
-import { SplashScreen } from 'expo';
-import * as Font from 'expo-font';
-import { Ionicons } from '@expo/vector-icons';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import * as React from "react";
+import { connect } from "react-redux";
+import { Platform, StatusBar, StyleSheet, View, Button } from "react-native";
+import * as SplashScreen from "expo-splash-screen";
+import * as Font from "expo-font";
+import { Ionicons } from "@expo/vector-icons";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
 
-import { me } from './store/user';
-import AuthStackScreen from './navigation/AuthNavigator';
-import BottomTabNavigator from './navigation/BottomTabNavigator';
-import IngredientConfirmation from './screens/IngredientConfirmation';
-import ConnectedDishScreen from './screens/DishScreen';
-import useLinking from './navigation/useLinking';
+import { me } from "./store/user";
+import AuthStackScreen from "./navigation/AuthNavigator";
+import BottomTabNavigator from "./navigation/BottomTabNavigator";
+import IngredientConfirmation from "./screens/IngredientConfirmation";
+import ConnectedDishScreen from "./screens/DishScreen";
+import useLinking from "./navigation/useLinking";
 
 const Root = createStackNavigator();
 
@@ -32,16 +32,16 @@ function Main(props) {
         // Load our initial navigation state
         setInitialNavigationState(await getInitialState());
 
-        props.loadUserInfo();
+        await props.loadUserInfo();
 
         // Load fonts
         await Font.loadAsync({
           ...Ionicons.font,
           ...MaterialCommunityIcons.font,
-          'space-mono': require('./assets/fonts/SpaceMono-Regular.ttf'),
-          'avenir-light': require('./assets/fonts/Avenir-Light.ttf'),
-          'avenir-book': require('./assets/fonts/Avenir-Book.ttf'),
-          'avenir-roman': require('./assets/fonts/Avenir-Roman.ttf'),
+          "space-mono": require("./assets/fonts/SpaceMono-Regular.ttf"),
+          "avenir-light": require("./assets/fonts/Avenir-Light.ttf"),
+          "avenir-book": require("./assets/fonts/Avenir-Book.ttf"),
+          "avenir-roman": require("./assets/fonts/Avenir-Roman.ttf"),
         });
       } catch (e) {
         // We might want to provide this error information to an error reporting service
@@ -64,16 +64,16 @@ function Main(props) {
     };
     return (
       <View style={styles.container}>
-        {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
+        {Platform.OS === "ios" && <StatusBar barStyle="default" />}
         <NavigationContainer
           ref={containerRef}
           initialState={initialNavigationState}
         >
           <Root.Navigator
             screenOptions={{
-              headerTintColor: 'black',
+              headerTintColor: "black",
               headerTitleStyle: {
-                fontWeight: 'bold',
+                fontWeight: "bold",
               },
             }}
           >
@@ -82,21 +82,21 @@ function Main(props) {
                 <Root.Screen
                   name="App"
                   component={BottomTabNavigator}
-                  options={{ headerMode: 'none', headerShown: false }}
+                  options={{ headerMode: "none", headerShown: false }}
                 />
                 <Root.Screen
                   name="Confirmation"
                   component={IngredientConfirmation}
                   options={{
-                    title: '',
+                    title: "",
                   }}
                 />
                 <Root.Screen
                   name="Your Dish"
                   component={ConnectedDishScreen}
                   options={({ navigation }) => ({
-                    title: '',
-                    headerMode: 'none',
+                    title: "",
+                    headerMode: "none",
                     // headerRight: () => (
                     //   <Button
                     //     onPress={() => navigation.navigate('Your Dish', save)}
@@ -109,7 +109,7 @@ function Main(props) {
               </>
             ) : (
               <Root.Screen
-                options={{ headerMode: 'none', headerShown: false }}
+                options={{ headerMode: "none", headerShown: false }}
                 name="Auth"
                 component={AuthStackScreen}
               />
@@ -124,15 +124,15 @@ function Main(props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
   },
 });
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   isLoggedIn: !!state.user.id,
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   loadUserInfo: () => dispatch(me()),
 });
 

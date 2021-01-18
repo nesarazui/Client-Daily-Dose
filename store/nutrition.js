@@ -1,25 +1,25 @@
-import axios from 'axios';
-// import { ED_APIKEY, ED_APIID } from '../secret';
-import Constants from 'expo-constants';
+import axios from "axios";
+import { ED_APIKEY, ED_APIID } from "../secret";
+// import Constants from "expo-constants";
 import {
   combine,
   urlEncoded,
   convertData,
   convertIngrData,
-} from '../utilityFunctions';
+} from "../utilityFunctions";
 
 //ACTION TYPES
-const GOT_NUTRITION = 'GOT_NUTRITION';
-const GOT_INGR_NUTRITION = 'GOT_INGR_NUTRITION';
+const GOT_NUTRITION = "GOT_NUTRITION";
+const GOT_INGR_NUTRITION = "GOT_INGR_NUTRITION";
 
-const UPDATE_INGR_NUT_FROM_MEALDIARY = 'UPDATE_INGR_NUT_FROM_MEALDIARY'; // FROM MEAL DIARY
-const UPDATE_DISH_NUT_FROM_MEALDIARY = 'UPDATE_DISH_NUT_FROM_MEALDIARY'; // FROM MEAL DIARY
-const INGREDIENT_NAMES_FROM_MEALDIARY = 'INGREDIENT_NAMES_FROM_MEALDIARY'; //FROM MEAL DIARY
+const UPDATE_INGR_NUT_FROM_MEALDIARY = "UPDATE_INGR_NUT_FROM_MEALDIARY"; // FROM MEAL DIARY
+const UPDATE_DISH_NUT_FROM_MEALDIARY = "UPDATE_DISH_NUT_FROM_MEALDIARY"; // FROM MEAL DIARY
+const INGREDIENT_NAMES_FROM_MEALDIARY = "INGREDIENT_NAMES_FROM_MEALDIARY"; //FROM MEAL DIARY
 
 const RESET_DISHNUT_FROM_INGR_CONFIRMATION =
-  'RESET_DISHNUT_FROM_INGR_CONFIRMATION'; //FROM INGR CONFIRMATION
+  "RESET_DISHNUT_FROM_INGR_CONFIRMATION"; //FROM INGR CONFIRMATION
 const RESET_INGRNUT_FROM_INGR_CONFIRMATION =
-  'RESET_INGRNUT_FROM_INGR_CONFIRMATION'; //FROM INGR CONFIRMATION
+  "RESET_INGRNUT_FROM_INGR_CONFIRMATION"; //FROM INGR CONFIRMATION
 
 //ACTION CREATORS
 export const gotNutrition = (nutrition) => ({
@@ -64,13 +64,13 @@ export const fetchNutrition = (name, dishUrl, userDish) => {
     try {
       let stringify = urlEncoded(userDish); //4%20oz%20rice%20and%201%20oz%20Kale
       let { data } = await axios.get(
-        // `https://api.edamam.com/api/nutrition-data?app_id=${ED_APIID}&app_key=${ED_APIKEY}&ingr=${stringify}`
-        `https://api.edamam.com/api/nutrition-data?app_id=${Constants.manifest.extra.edamamID}&app_key=${Constants.manifest.extra.edamamKey}&ingr=${stringify}`
+        `https://api.edamam.com/api/nutrition-data?app_id=${ED_APIID}&app_key=${ED_APIKEY}&ingr=${stringify}`
+        //`https://api.edamam.com/api/nutrition-data?app_id=${Constants.manifest.extra.edamamID}&app_key=${Constants.manifest.extra.edamamKey}&ingr=${stringify}`
       );
       let newData = convertData(name, dishUrl, data);
       dispatch(gotNutrition(newData));
     } catch (err) {
-      console.log('not able to load nutrition details', err);
+      console.log("not able to load nutrition details", err);
     }
   };
 };
@@ -85,15 +85,15 @@ export const fetchIngredient = (ingrNameArr, portionQuantArr, userDish) => {
       for (let i = 0; i < userDish.length; i++) {
         let stringify = urlEncoded(userDish[i]);
         let { data } = await axios.get(
-          // `https://api.edamam.com/api/nutrition-data?app_id=${ED_APIID}&app_key=${ED_APIKEY}&ingr=${stringify}`
-          `https://api.edamam.com/api/nutrition-data?app_id=${Constants.manifest.extra.edamamID}&app_key=${Constants.manifest.extra.edamamKey}&ingr=${stringify}`
+          `https://api.edamam.com/api/nutrition-data?app_id=${ED_APIID}&app_key=${ED_APIKEY}&ingr=${stringify}`
+          //`https://api.edamam.com/api/nutrition-data?app_id=${Constants.manifest.extra.edamamID}&app_key=${Constants.manifest.extra.edamamKey}&ingr=${stringify}`
         );
         let newData = convertIngrData(ingrNameArr[i], portionQuantArr[i], data);
         ingredients.push(newData);
       }
       dispatch(gotIngrNutrition(ingredients));
     } catch (err) {
-      console.log('not able to load ingredient nutrition details', err);
+      console.log("not able to load ingredient nutrition details", err);
     }
   };
 };

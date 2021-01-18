@@ -1,14 +1,14 @@
-import React from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
-import FirstScreen from '../screens/FirstScreen';
-import ConnectedLogin from '../screens/Login';
-import ConnectedSignup from '../screens/Signup';
+import React from "react";
+import { createStackNavigator } from "@react-navigation/stack";
+import FirstScreen from "../screens/FirstScreen";
+import ConnectedLogin from "../screens/Login";
+import ConnectedSignup from "../screens/Signup";
 
 const AuthStack = createStackNavigator();
-const INITIAL_ROUTE_NAME = 'FirstScreen';
+const INITIAL_ROUTE_NAME = "FirstScreen";
 
 export default AuthStackScreen = ({ navigation, route }) => {
-  navigation.setOptions({ headerTitle: getHeaderTitle(route) });
+  //navigation.setOptions({ headerTitle: getHeaderTitle(route) });
   return (
     <AuthStack.Navigator
       initialRouteName={INITIAL_ROUTE_NAME}
@@ -28,11 +28,11 @@ function getHeaderTitle(route) {
     route.state?.routes[route.state.index]?.name ?? INITIAL_ROUTE_NAME;
 
   switch (routeName) {
-    case 'FirstScreen':
+    case "FirstScreen":
       return null;
-    case 'Login':
-      return 'Login';
-    case 'Signup':
-      return 'Sign Up';
+    case "Login":
+      return "Login";
+    case "Signup":
+      return "Sign Up";
   }
 }

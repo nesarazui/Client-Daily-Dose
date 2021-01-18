@@ -1,14 +1,15 @@
-import axios from 'axios';
-import { saveDishValues } from '../utilityFunctions';
+import axios from "axios";
+import { saveDishValues } from "../utilityFunctions";
+import { DOMAIN_URL } from "../constants/domain";
 
 //ACTION TYPE
-const ADDING_IMAGE_URI = 'ADDING_IMAGE_URI';
+const ADDING_IMAGE_URI = "ADDING_IMAGE_URI";
 
-const FINALIZE_INGREDIENT = 'FINALIZE_INGREDIENT';
+const FINALIZE_INGREDIENT = "FINALIZE_INGREDIENT";
 
-const CONSOLIDATE_DATA = 'CONSOLIDATE_DATA';
+const CONSOLIDATE_DATA = "CONSOLIDATE_DATA";
 
-const CONSOLIDATE_DATA_FROM_MEALDIARY = 'CONSOLIDATE_DATA_FROM_MEALDIARY';
+const CONSOLIDATE_DATA_FROM_MEALDIARY = "CONSOLIDATE_DATA_FROM_MEALDIARY";
 
 //ACTION CREATOR
 const addingImageUri = (uri) => {
@@ -27,14 +28,14 @@ const finalizingIngredients = (ingredients, userIngredients, name) => {
   };
 };
 
-const consolidatingDataForAPI = consolidated => {
+const consolidatingDataForAPI = (consolidated) => {
   return {
     type: CONSOLIDATE_DATA,
     consolidated,
   };
 };
 
-export const consolidatingDataFromMealDiary = strings => {
+export const consolidatingDataFromMealDiary = (strings) => {
   return {
     type: CONSOLIDATE_DATA_FROM_MEALDIARY,
     strings,
@@ -43,7 +44,7 @@ export const consolidatingDataFromMealDiary = strings => {
 
 //THUNKS
 export const depositClarifaiData = (uri) => {
-  return dispatch => {
+  return (dispatch) => {
     try {
       dispatch(addingImageUri(uri));
     } catch (error) {
@@ -53,7 +54,7 @@ export const depositClarifaiData = (uri) => {
 };
 
 export const finalizeIngredients = (ingredients, userIngredients, name) => {
-  return dispatch => {
+  return (dispatch) => {
     try {
       dispatch(finalizingIngredients(ingredients, userIngredients, name));
     } catch (error) {
@@ -62,8 +63,8 @@ export const finalizeIngredients = (ingredients, userIngredients, name) => {
   };
 };
 
-export const consolidatingData = consolidated => {
-  return dispatch => {
+export const consolidatingData = (consolidated) => {
+  return (dispatch) => {
     try {
       dispatch(consolidatingDataForAPI(consolidated));
     } catch (error) {
@@ -73,7 +74,7 @@ export const consolidatingData = consolidated => {
 };
 
 export const createDish = (dishNut, formvalues, ingredientArray) => {
-  return async dispatch => {
+  return async (dispatch) => {
     try {
       saveDishValues(dishNut, formvalues);
       let dataForPost = {
@@ -81,7 +82,8 @@ export const createDish = (dishNut, formvalues, ingredientArray) => {
         ingredients: ingredientArray,
       };
       const { data } = await axios.post(
-        'https://daily-dose-server.herokuapp.com/api/dishes',
+        // 'https://daily-dose-server.herokuapp.com/api/dishes',
+        `http://${DOMAIN_URL}/api/dishes`,
         dataForPost
       );
     } catch (error) {
@@ -92,8 +94,8 @@ export const createDish = (dishNut, formvalues, ingredientArray) => {
 
 //INITIAL STATE
 const initialState = {
-  imgUrl: '',
-  name: '',
+  imgUrl: "",
+  name: "",
   finalIngredients: [],
   consolidatedData: [],
 };

@@ -1,25 +1,25 @@
-import * as React from 'react';
+import * as React from "react";
 import {
   StyleSheet,
   View,
   ImageBackground,
   Text,
   TextInput,
-} from 'react-native';
-import { Button } from 'react-native-elements';
-import { connect } from 'react-redux';
-import { StackActions } from '@react-navigation/native';
-import { Ionicons } from '@expo/vector-icons';
-import PasswordInputText from 'react-native-hide-show-password-input';
-import { login } from '../store/user';
+} from "react-native";
+import { Button } from "react-native-elements";
+import { connect } from "react-redux";
+import { StackActions } from "@react-navigation/native";
+import { Ionicons } from "@expo/vector-icons";
+import PasswordInputText from "react-native-hide-show-password-input";
+import { login } from "../store/user";
 
 class Login extends React.Component {
   constructor({ navigation }) {
     super();
     this.navigation = navigation;
     this.state = {
-      email: '',
-      password: '',
+      email: "",
+      password: "",
     };
     this.handleLogin = this.handleLogin.bind(this);
   }
@@ -34,14 +34,14 @@ class Login extends React.Component {
         <ImageBackground
           source={{
             uri:
-              'https://www.heart.org/-/media/aha/h4gm/article-images/fruit-and-vegetables.jpg',
+              "https://www.heart.org/-/media/aha/h4gm/article-images/fruit-and-vegetables.jpg",
           }}
           style={styles.image}
         >
           <View style={styles.loginBox}>
             <View>
               {this.props.error && this.props.error.response ? (
-                <Text style={{ color: 'red', fontFamily: 'avenir-roman' }}>
+                <Text style={{ color: "red", fontFamily: "avenir-roman" }}>
                   {this.props.error.response.data}
                 </Text>
               ) : null}
@@ -49,13 +49,13 @@ class Login extends React.Component {
 
             <View style={styles.emailContainer}>
               <View style={styles.emailIcon}>
-                <Ionicons name="md-person" size={30} color={'#659B0E'} />
+                <Ionicons name="md-person" size={30} color={"#659B0E"} />
               </View>
               <View style={styles.emailTextAndInput}>
                 <Text style={styles.email}>Email</Text>
                 <TextInput
                   style={styles.emailInput}
-                  onChangeText={text => {
+                  onChangeText={(text) => {
                     this.setState({ ...this.state, email: text });
                   }}
                 />
@@ -64,21 +64,21 @@ class Login extends React.Component {
 
             <View style={styles.passwordContainer}>
               <View style={styles.passwordIcon}>
-                <Ionicons name="ios-lock" size={32} color={'#659B0E'} />
+                <Ionicons name="ios-lock" size={32} color={"#659B0E"} />
               </View>
               <View style={styles.emailTextAndInput}>
-                <PasswordInputText
-                  style={styles.passwordText}
+                <Text style={styles.email}>Password</Text>
+                <TextInput
+                  secureTextEntry={true}
+                  style={styles.emailInput}
                   value={this.state.password}
-                  onChangeText={text => {
+                  onChangeText={(text) => {
                     this.setState({ ...this.state, password: text });
                   }}
-                  iconColor={'#659B0E'}
+                  iconColor={"#659B0E"}
                   iconSize={24}
-                  label={''}
+                  label={""}
                 />
-
-                <Text style={styles.password}>Password</Text>
               </View>
             </View>
 
@@ -88,18 +88,18 @@ class Login extends React.Component {
                 onPress={this.handleLogin}
                 color="#659B0E"
                 titleStyle={{
-                  color: 'white',
+                  color: "white",
                   fontSize: 18,
                   lineHeight: 20,
                 }}
                 buttonStyle={{
-                  backgroundColor: '#659B0E',
+                  backgroundColor: "#659B0E",
                   opacity: 1,
                   borderRadius: 20,
                   height: 40,
                   width: 150,
-                  justifyContent: 'center',
-                  alignSelf: 'center',
+                  justifyContent: "center",
+                  alignSelf: "center",
                   marginTop: 20,
                 }}
               />
@@ -108,20 +108,20 @@ class Login extends React.Component {
             <View>
               <Button
                 title="Create an Account"
-                onPress={() => this.props.navigation.push('Signup')}
+                onPress={() => this.props.navigation.push("Signup")}
                 titleStyle={{
-                  color: '#659B0E',
+                  color: "#659B0E",
                   fontSize: 15,
                   lineHeight: 20,
                 }}
                 buttonStyle={{
-                  backgroundColor: '#FFFFFF00',
+                  backgroundColor: "#FFFFFF00",
                   opacity: 1,
                   borderRadius: 20,
                   height: 40,
                   width: 150,
-                  justifyContent: 'center',
-                  alignSelf: 'center',
+                  justifyContent: "center",
+                  alignSelf: "center",
                 }}
               />
             </View>
@@ -135,35 +135,35 @@ class Login extends React.Component {
 const styles = StyleSheet.create({
   background: {
     flex: 1,
-    backgroundColor: '#659B0E',
-    flexDirection: 'column',
+    backgroundColor: "#659B0E",
+    flexDirection: "column",
   },
   image: {
     flex: 1,
-    width: '100%',
-    height: '100%',
-    justifyContent: 'center',
-    alignItems: 'center',
+    width: "100%",
+    height: "100%",
+    justifyContent: "center",
+    alignItems: "center",
   },
   loginBox: {
     marginTop: 50,
     padding: 10,
-    backgroundColor: 'rgba(255, 255, 255, 0.6)',
+    backgroundColor: "rgba(255, 255, 255, 0.6)",
     width: 350,
     height: 290,
     borderRadius: 30,
-    alignItems: 'center',
-    justifyContent: 'flex-start',
+    alignItems: "center",
+    justifyContent: "flex-start",
   },
   emailContainer: {
-    flexDirection: 'row',
-    backgroundColor: 'white',
+    flexDirection: "row",
+    backgroundColor: "white",
     width: 330,
     height: 75,
     padding: 5,
     marginTop: 5,
     borderRadius: 20,
-    alignItems: 'center',
+    alignItems: "center",
   },
   emailIcon: {
     marginLeft: 20,
@@ -172,32 +172,32 @@ const styles = StyleSheet.create({
     marginLeft: 20,
   },
   email: {
-    fontFamily: 'avenir-book',
+    fontFamily: "avenir-book",
     marginTop: 10,
   },
   emailInput: {
     width: 250,
-    fontFamily: 'avenir-book',
+    fontFamily: "avenir-book",
     fontSize: 17,
     paddingBottom: 4,
     borderBottomWidth: 0.45,
-    borderColor: '#808080',
+    borderColor: "#808080",
   },
   passwordContainer: {
-    flexDirection: 'row',
-    backgroundColor: 'white',
+    flexDirection: "row",
+    backgroundColor: "white",
     width: 330,
     height: 75,
     padding: 5,
     marginTop: 9,
     borderRadius: 20,
-    alignItems: 'center',
+    alignItems: "center",
   },
   passwordIcon: {
     marginLeft: 20,
   },
   password: {
-    fontFamily: 'avenir-book',
+    fontFamily: "avenir-book",
     marginLeft: 5,
     marginBottom: 45,
   },
@@ -208,16 +208,16 @@ const styles = StyleSheet.create({
     width: 250,
     fontSize: 17,
 
-    fontFamily: 'avenir-book',
+    fontFamily: "avenir-book",
   },
 });
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   user: state.user,
   error: state.user.error,
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   loginDispatch: (email, password) => dispatch(login(email, password)),
 });
 

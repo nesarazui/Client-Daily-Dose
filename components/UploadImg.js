@@ -1,13 +1,21 @@
-import * as React from 'react';
-import { View, StyleSheet, Text, TouchableOpacity, Image, ImageBackground, } from 'react-native';
-import * as ImagePicker from 'expo-image-picker';
-import Constants from 'expo-constants';
-import * as Permissions from 'expo-permissions';
-import { connect } from 'react-redux';
-import { depositClarifaiData } from '../store/dishes';
+import * as React from "react";
+import {
+  View,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  Image,
+  ImageBackground,
+} from "react-native";
+import * as ImagePicker from "expo-image-picker";
+import Constants from "expo-constants";
+import * as Permissions from "expo-permissions";
+import { connect } from "react-redux";
+import { depositClarifaiData } from "../store/dishes";
 
-const Clarifai = require('clarifai');
-const app = new Clarifai.App({ apiKey: '51299dbad48e410fbf0107a0b261fa24' });
+const Clarifai = require("clarifai");
+// const app = new Clarifai.App({ apiKey: '51299dbad48e410fbf0107a0b261fa24' });
+const app = new Clarifai.App({ apiKey: "2de29305067649a1821ff754f510501a" }); //nk key
 
 class UploadImg extends React.Component {
   constructor({ navigation }) {
@@ -23,26 +31,27 @@ class UploadImg extends React.Component {
     this.getPermissionAsync();
   }
 
+  //"bd367be194cf45149e75f01d59f77ba7" = Model ID for food_items-v1.0 (Model Name)
   submitImage = () => {
     app.models
-      .predict('bd367be194cf45149e75f01d59f77ba7', {
+      .predict("bd367be194cf45149e75f01d59f77ba7", {
         base64: this.state.imageB64,
       })
       .then(
-        response => {
+        (response) => {
           let foodArr = response.outputs[0].data.concepts;
           this.depositData(foodArr, this.state.imageUri);
           this.refreshScreen();
         },
-        function(err) {
-          console.log('there was an error', err);
+        function (err) {
+          console.log("there was an error", err);
         }
       );
   };
 
   async depositData(data, uri) {
     await this.props.depositClarifaiData(uri);
-    return this.navigation.navigate('Confirmation', { data });
+    return this.navigation.navigate("Confirmation", { data });
   }
 
   refreshScreen() {
@@ -51,42 +60,47 @@ class UploadImg extends React.Component {
 
   render() {
     return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-
+      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
         <ImageBackground
-          source={require('../assets/images/green.png')}
+          source={require("../assets/images/green.png")}
           style={styles.image}
         >
           <View style={styles.container}>
-        <Text style={styles.getStartedText}>Upload your dish!</Text>
+            <Text style={styles.getStartedText}>Upload your dish!</Text>
 
-        {this.state.imageUri === null ? (
-          <View style={styles.uploadButtons}>
-            <TouchableOpacity onPress={this.takePicture} style={styles.button}>
-              <Text style={styles.buttonText}>Camera</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={this._pickImage} style={styles.button}>
-              <Text style={styles.buttonText}>Gallery</Text>
-            </TouchableOpacity>
+            {this.state.imageUri === null ? (
+              <View style={styles.uploadButtons}>
+                <TouchableOpacity
+                  onPress={this.takePicture}
+                  style={styles.button}
+                >
+                  <Text style={styles.buttonText}>Camera</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={this._pickImage}
+                  style={styles.button}
+                >
+                  <Text style={styles.buttonText}>Gallery</Text>
+                </TouchableOpacity>
+              </View>
+            ) : (
+              <View>
+                <View style={styles.uploadButtons}>
+                  <Image
+                    source={{ uri: this.state.imageUri }}
+                    // style={{ width: 200, height: 200 }}
+                    style={styles.dishimage}
+                  />
+                  <TouchableOpacity
+                    style={styles.button}
+                    onPress={this.submitImage}
+                  >
+                    <Text style={styles.buttonText}>Submit</Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
+            )}
           </View>
-        ) : (
-          <View>
-            <View style={styles.uploadButtons}>
-              <Image
-                source={{ uri: this.state.imageUri }}
-                // style={{ width: 200, height: 200 }}
-                style={styles.dishimage}
-              />
-              <TouchableOpacity
-                style={styles.button}
-                onPress={this.submitImage}
-              >
-                <Text style={styles.buttonText}>Submit</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        )}
-        </View>
         </ImageBackground>
       </View>
     );
@@ -95,8 +109,8 @@ class UploadImg extends React.Component {
   getPermissionAsync = async () => {
     if (Constants.platform.ios) {
       const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
-      if (status !== 'granted') {
-        alert('Sorry, we need camera roll permissions to make this work!');
+      if (status !== "granted") {
+        alert("Sorry, we need camera roll permissions to make this work!");
       }
     }
   };
@@ -104,8 +118,8 @@ class UploadImg extends React.Component {
   getCameraPermissionAsync = async () => {
     if (Constants.platform.ios) {
       const { status } = await Permissions.askAsync(Permissions.CAMERA);
-      if (status !== 'granted') {
-        alert('Sorry, we need camera roll permissions to make this work!');
+      if (status !== "granted") {
+        alert("Sorry, we need camera roll permissions to make this work!");
       }
     }
   };
@@ -127,7 +141,7 @@ class UploadImg extends React.Component {
     try {
       await this.getCameraPermissionAsync();
       let result = await ImagePicker.launchCameraAsync({
-        mediaTypes: 'Images',
+        mediaTypes: "Images",
         quality: 1,
         base64: true,
         allowsEditing: true,
@@ -142,7 +156,7 @@ class UploadImg extends React.Component {
   };
 }
 
-const mapDispatch = dispatch => ({
+const mapDispatch = (dispatch) => ({
   depositClarifaiData: (data, uri) => {
     dispatch(depositClarifaiData(data, uri));
   },
@@ -152,68 +166,67 @@ export default connect(null, mapDispatch)(UploadImg);
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#ffffff',
+    backgroundColor: "#ffffff",
     borderRadius: 10,
     width: 350,
     height: 500,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
   uploadButtons: {
-    flexDirection: 'column',
-    justifyContent: 'space-between',
-    alignItems: 'center'
+    flexDirection: "column",
+    justifyContent: "space-between",
+    alignItems: "center",
   },
   uploadButtonsagain: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
   getStartedText: {
     fontSize: 22,
-    color: 'black',
+    color: "black",
     lineHeight: 45,
-    textAlign: 'center',
-    fontFamily: 'Avenir-Book',
-    fontWeight: 'bold',
-    backgroundColor: 'white',
-    opacity: 0.80,
+    textAlign: "center",
+    fontFamily: "Avenir-Book",
+    fontWeight: "bold",
+    backgroundColor: "white",
+    opacity: 0.8,
     width: 250,
     height: 45,
-    alignItems: 'center',
+    alignItems: "center",
     borderRadius: 8,
-    overflow: 'hidden',
+    overflow: "hidden",
   },
   button: {
-    backgroundColor: '#FF7F4B',
+    backgroundColor: "#FF7F4B",
     paddingTop: 15,
     margin: 10,
     width: 180,
     height: 60,
     borderRadius: 30,
-    fontFamily: 'Avenir-Book',
-    alignItems: 'center',
+    fontFamily: "Avenir-Book",
+    alignItems: "center",
   },
   buttonText: {
     fontSize: 20,
-    color: '#fff',
-    fontFamily: 'Avenir-Book',
+    color: "#fff",
+    fontFamily: "Avenir-Book",
   },
   image: {
     flex: 1,
-    width: '100%',
-    height: '100%',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'transparent',
+    width: "100%",
+    height: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "transparent",
   },
   dishimage: {
     marginTop: 17,
     width: 250,
     height: 250,
     borderRadius: 5,
-    overflow: 'hidden',
+    overflow: "hidden",
     borderRadius: 8,
-    marginBottom: 20
+    marginBottom: 20,
   },
 });
-

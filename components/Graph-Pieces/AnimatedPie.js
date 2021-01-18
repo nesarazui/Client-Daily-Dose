@@ -1,8 +1,8 @@
-import React from 'react';
-import { Animated, View, Easing } from 'react-native';
-import SVG, { G } from 'react-native-svg';
+import React from "react";
+import { Animated, View, Easing } from "react-native";
+import SVG, { G } from "react-native-svg";
 
-import Slice from './AnimatedPieSlice';
+import Slice from "./AnimatedPieSlice";
 
 const AnimatedSlice = Animated.createAnimatedComponent(Slice);
 
@@ -29,13 +29,13 @@ export default class AnimatedPie extends React.Component {
     let sum = carbs + fat + protein;
 
     let data = [
-      { number: carbs / sum, color: '#FF7F4B' },
-      { number: fat / sum, color: '#E2CA2B' },
-      { number: protein / sum, color: '#E35052' },
+      { number: carbs / sum, color: "#FF7F4B" },
+      { number: fat / sum, color: "#E2CA2B" },
+      { number: protein / sum, color: "#E35052" },
     ];
 
     if (sum === 0) {
-      data = [{ number: 1, color: '#3E3D3F' }];
+      data = [{ number: 1, color: "#3E3D3F" }];
     }
 
     return data;
@@ -45,6 +45,7 @@ export default class AnimatedPie extends React.Component {
     Animated.timing(this.state.animValue, {
       toValue: 2,
       duration: 500,
+      useNativeDriver: true,
       easing: Easing.inOut(Easing.quad),
     }).start();
     // can pass this in the start(() => {setTimeout(this.resetPie, 2000}) to reset
@@ -72,7 +73,7 @@ export default class AnimatedPie extends React.Component {
                   endAngle={endAngle}
                   color={item.color}
                   data={this.state.data}
-                  key={'pie' + index}
+                  key={"pie" + index}
                 />
               );
             })}
