@@ -64,7 +64,7 @@ class Login extends React.Component {
 
             <View style={styles.passwordContainer}>
               <View style={styles.passwordIcon}>
-                <Ionicons name="ios-lock" size={32} color={"#659B0E"} />
+                <Ionicons name="ios-lock-closed" size={32} color={"#659B0E"} />
               </View>
               <View style={styles.emailTextAndInput}>
                 <Text style={styles.email}>Password</Text>
