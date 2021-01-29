@@ -21,7 +21,6 @@ import {
   validateInformation,
   dietaryArray,
 } from "../utilityFunctions";
-import PasswordInputText from "react-native-hide-show-password-input";
 import CheckBox from "react-native-check-box";
 
 class Signup extends React.Component {
@@ -171,7 +170,8 @@ class Signup extends React.Component {
               <View style={styles.textContainer}>
                 <Text style={styles.headerText}>Password:</Text>
                 <View style={styles.passwordContainer}>
-                  <PasswordInputText
+                  <TextInput
+                    secureTextEntry={true}
                     style={styles.passwordText}
                     value={this.state.password}
                     onChangeText={(password) => {
