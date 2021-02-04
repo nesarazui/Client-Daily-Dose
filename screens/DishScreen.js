@@ -1,15 +1,15 @@
-import * as React from 'react';
-import { connect } from 'react-redux';
-import { StyleSheet, Dimensions, View, Text } from 'react-native';
-import { TabView, TabBar } from 'react-native-tab-view';
-import CurrentDish from '../components/CurrentDish';
-import CurrentIngredient from '../components/CurrentIngredient';
-import { fetchNutrition, fetchIngredient } from '../store/nutrition';
-import { ingrNameFunc, portionQuantFunc, routes } from '../utilityFunctions';
-import SaveDish from '../components/SaveDish';
-import { createDish } from '../store/dishes';
+import * as React from "react";
+import { connect } from "react-redux";
+import { StyleSheet, Dimensions, View, Text } from "react-native";
+import { TabView, TabBar } from "react-native-tab-view";
+import CurrentDish from "../components/CurrentDish";
+import CurrentIngredient from "../components/CurrentIngredient";
+import { fetchNutrition, fetchIngredient } from "../store/nutrition";
+import { ingrNameFunc, portionQuantFunc, routes } from "../utilityFunctions";
+import SaveDish from "../components/SaveDish";
+import { createDish } from "../store/dishes";
 
-const initialLayout = { width: Dimensions.get('window').width };
+const initialLayout = { width: Dimensions.get("window").width };
 
 class DishScreen extends React.Component {
   constructor({ navigation }) {
@@ -17,7 +17,7 @@ class DishScreen extends React.Component {
     this.navigation = navigation;
     this.state = {
       index: 0,
-      routes: [{ key: 'Dish', title: 'Dish' }],
+      routes: [{ key: "Dish", title: "Dish" }],
       modalOpen: false,
     };
     this.renderScene = this.renderScene.bind(this);
@@ -58,12 +58,12 @@ class DishScreen extends React.Component {
     });
   }
 
-  onSave(values) {
+  async onSave(values) {
     this.setState({
       modalOpen: false,
     });
-    this.props.createDish(this.props.dishNut, values, this.props.ingrNut);
-    return this.navigation.navigate('Meal Diary');
+    await this.props.createDish(this.props.dishNut, values, this.props.ingrNut);
+    return this.navigation.navigate("Meal Diary");
   }
 
   handleCancel() {
@@ -73,8 +73,8 @@ class DishScreen extends React.Component {
   }
 
   componentDidMount() {
-    this.unsubscribe = this.navigation.addListener('focus', () => {
-      this.setState({ routes: [{ key: 'Dish', title: 'Dish' }] });
+    this.unsubscribe = this.navigation.addListener("focus", () => {
+      this.setState({ routes: [{ key: "Dish", title: "Dish" }] });
       this.fetchDataFromDbOrEdamam();
     });
   }
@@ -84,14 +84,14 @@ class DishScreen extends React.Component {
   }
 
   renderScene = ({ route, jumpTo }) => {
-    if (route.key === 'Dish') {
+    if (route.key === "Dish") {
       return (
         <View>
           <SaveDish
             isVisible={this.state.modalOpen}
             handleCancel={this.handleCancel}
             dishNut={this.props.dishNut}
-            onSave={values => {
+            onSave={(values) => {
               this.onSave(values);
             }}
           />
@@ -113,23 +113,23 @@ class DishScreen extends React.Component {
     }
   };
 
-  renderTabBar = props => (
+  renderTabBar = (props) => (
     <TabBar
       {...props}
-      indicatorStyle={{ backgroundColor: '#E2CA2B' }}
-      style={{ backgroundColor: '#659B0E', fontFamily: 'avenir-book' }}
+      indicatorStyle={{ backgroundColor: "#E2CA2B" }}
+      style={{ backgroundColor: "#659B0E", fontFamily: "avenir-book" }}
       scrollEnabled={true}
     />
   );
 
-  handleIndexChange = newIndex => {
+  handleIndexChange = (newIndex) => {
     this.setState({ index: newIndex });
   };
 
-  createRoutes = arr => {
+  createRoutes = (arr) => {
     let routesObj = routes(arr);
     this.setState({
-      routes: [...[{ key: 'Dish', title: 'Dish' }], ...routesObj],
+      routes: [...[{ key: "Dish", title: "Dish" }], ...routesObj],
     });
   };
 
@@ -155,7 +155,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   name: state.dishes.name,
   imgUrl: state.dishes.imgUrl,
   finalIngrObj: state.dishes.finalIngredients,
@@ -165,7 +165,7 @@ const mapStateToProps = state => ({
   ingredientNames: state.nutrition.ingredientNames,
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   fetchNutritionDispatch: (name, dishUrl, finalIngrStr) =>
     dispatch(fetchNutrition(name, dishUrl, finalIngrStr)),
   fetchIngredientDispatch: (ingrNameArr, portionQuantArr, finalIngrStr) =>

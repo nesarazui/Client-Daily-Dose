@@ -1,32 +1,32 @@
-import * as React from 'react';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import TabBarIcon from '../components/TabBarIcon';
-import ConnectedHomeScreen from '../screens/HomeScreen';
-import MealDiary from '../screens/MealDiary';
-import UploadImg from '../components/UploadImg';
+import * as React from "react";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import TabBarIcon from "../components/TabBarIcon";
+import ConnectedHomeScreen from "../screens/HomeScreen";
+import MealDiary from "../screens/MealDiary";
+import UploadImg from "../components/UploadImg";
 
 const BottomTab = createBottomTabNavigator();
-const INITIAL_ROUTE_NAME = 'home';
+const INITIAL_ROUTE_NAME = "home";
 
 export default function BottomTabNavigator({ navigation, route }) {
   // Set the header title on the parent stack navigator depending on the
   // currently active tab. Learn more in the documentation:
   // https://reactnavigation.org/docs/en/screen-options-resolution.html
-  navigation.setOptions({ headerTitle: getHeaderTitle(route) });
+  //navigation.setOptions({ headerTitle: getHeaderTitle(route) });
 
   return (
     <BottomTab.Navigator
       initialRouteName={INITIAL_ROUTE_NAME}
       tabBarOptions={{
-        inactiveTintColor: '#A9A9A9',
-        activeTintColor: '#659B0E',
+        inactiveTintColor: "#A9A9A9",
+        activeTintColor: "#659B0E",
       }}
     >
       <BottomTab.Screen
         name="Home"
         component={ConnectedHomeScreen}
         options={{
-          title: 'Home',
+          title: "Home",
           tabBarIcon: ({ focused }) => (
             <TabBarIcon icon="ionicons" focused={focused} name="md-home" />
           ),
@@ -36,7 +36,7 @@ export default function BottomTabNavigator({ navigation, route }) {
         name="Photos"
         component={UploadImg}
         options={{
-          title: 'Add Dish',
+          title: "Add Dish",
           tabBarIcon: ({ focused }) => (
             <TabBarIcon
               icon="materialCommunityIcons"
@@ -50,7 +50,7 @@ export default function BottomTabNavigator({ navigation, route }) {
         name="Meal Diary"
         component={MealDiary}
         options={{
-          title: 'Meal Diary',
+          title: "Meal Diary",
           tabBarIcon: ({ focused }) => (
             <TabBarIcon icon="ionicons" focused={focused} name="md-journal" />
           ),
@@ -66,11 +66,11 @@ function getHeaderTitle(route) {
     route.state?.routes[route.state.index]?.name ?? INITIAL_ROUTE_NAME;
 
   switch (routeName) {
-    case 'Home':
-      return 'Welcome!';
-    case 'Photos':
-      return 'Add Dish';
-    case 'Meal Diary':
-      return 'Your Meal Diary';
+    case "Home":
+      return "Welcome!";
+    case "Photos":
+      return "Add Dish";
+    case "Meal Diary":
+      return "Your Meal Diary";
   }
 }

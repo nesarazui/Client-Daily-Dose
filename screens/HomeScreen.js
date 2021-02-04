@@ -1,10 +1,10 @@
-import * as React from 'react';
-import { StyleSheet, Text, View, ImageBackground } from 'react-native';
-import Moment from 'moment';
-import { Button } from 'react-native-elements';
-import { connect } from 'react-redux';
-import { logout } from '../store/user';
-import { capitalize } from '../utilityFunctions';
+import * as React from "react";
+import { StyleSheet, Text, View, ImageBackground } from "react-native";
+import Moment from "moment";
+import { Button } from "react-native-elements";
+import { connect } from "react-redux";
+import { logout } from "../store/user";
+import { capitalize } from "../utilityFunctions";
 
 class HomeScreen extends React.Component {
   constructor({ navigation }) {
@@ -24,7 +24,7 @@ class HomeScreen extends React.Component {
     return (
       <View style={styles.container}>
         <ImageBackground
-          source={require('../assets/images/fruits-purplegreen.png')}
+          source={require("../assets/images/fruits-purplegreen.png")}
           style={styles.image}
         >
           <View style={styles.userContainer}>
@@ -34,22 +34,22 @@ class HomeScreen extends React.Component {
               <View style={styles.textInnerContainer}>
                 <Text style={styles.subHeader}>Sex: </Text>
                 <Text style={styles.text}>
-                  {' '}
-                  {user.sex ? capitalize(user.sex) : ''}
+                  {" "}
+                  {user.sex ? capitalize(user.sex) : ""}
                 </Text>
               </View>
 
               <View style={styles.birthday}>
                 <Text style={styles.subHeader}>Birthday: </Text>
                 <Text style={styles.text}>
-                  {Moment(user.birthdate).format('MMMM Do, YYYY')}
+                  {Moment(user.birthdate).format("MMMM Do, YYYY")}
                 </Text>
               </View>
 
               <View style={styles.textInnerContainer}>
                 <Text style={styles.subHeader}>Height: </Text>
                 <Text style={styles.text}>
-                  {' '}
+                  {" "}
                   {Math.floor(user.height / 12)} ft {user.height % 12} in
                 </Text>
               </View>
@@ -69,12 +69,12 @@ class HomeScreen extends React.Component {
                         key={ind.toString() + Math.random().toString()}
                         style={styles.dietPref}
                       >
-                        - {el === 'glutenFree' ? 'Gluten Free' : ''}
-                        {el === 'dairyFree' ? 'Dairy Free' : ''}
-                        {el === 'vegan' ? 'Vegan' : ''}
-                        {el === 'vegetarian' ? 'Vegetarian' : ''}
-                        {el === 'lowCarb' ? 'Low Carb' : ''}
-                        {el === 'lowFat' ? 'Low Fat' : ''}
+                        - {el === "glutenFree" ? "Gluten Free" : ""}
+                        {el === "dairyFree" ? "Dairy Free" : ""}
+                        {el === "vegan" ? "Vegan" : ""}
+                        {el === "vegetarian" ? "Vegetarian" : ""}
+                        {el === "lowCarb" ? "Low Carb" : ""}
+                        {el === "lowFat" ? "Low Fat" : ""}
                       </Text>
                     );
                   })
@@ -90,18 +90,18 @@ class HomeScreen extends React.Component {
                 onPress={this.handleLogout}
                 color="#659B0E"
                 titleStyle={{
-                  color: 'white',
+                  color: "white",
                   fontSize: 15,
                   lineHeight: 15,
                 }}
                 buttonStyle={{
-                  backgroundColor: '#FF7F4B',
+                  backgroundColor: "#FF7F4B",
                   opacity: 1,
                   borderRadius: 20,
                   height: 35,
                   width: 190,
-                  justifyContent: 'center',
-                  alignSelf: 'center',
+                  justifyContent: "center",
+                  alignSelf: "center",
                   marginTop: 10,
                 }}
               />
@@ -116,58 +116,58 @@ class HomeScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
   },
   image: {
     flex: 1,
-    width: '100%',
-    height: '100%',
-    justifyContent: 'center',
-    alignItems: 'center',
+    width: "100%",
+    height: "100%",
+    justifyContent: "center",
+    alignItems: "center",
     opacity: 0.8,
   },
   userContainer: {
-    backgroundColor: 'white',
+    backgroundColor: "white",
     opacity: 0.85,
     width: 280,
     height: 430,
     marginTop: 40,
-    alignItems: 'center',
+    alignItems: "center",
     borderRadius: 30,
   },
   header: {
-    fontFamily: 'avenir-book',
+    fontFamily: "avenir-book",
     fontSize: 30,
     marginTop: 50,
     padding: 5,
-    alignSelf: 'center',
-    fontWeight: 'bold',
+    alignSelf: "center",
+    fontWeight: "bold",
   },
   subHeader: {
     fontSize: 18,
-    fontFamily: 'avenir-roman',
+    fontFamily: "avenir-roman",
   },
   text: {
-    fontFamily: 'avenir-book',
-    alignSelf: 'center',
+    fontFamily: "avenir-book",
+    alignSelf: "center",
   },
   textContainer: {
     width: 245,
     height: 230,
-    justifyContent: 'center',
+    justifyContent: "center",
   },
   textInnerContainer: {
-    flexDirection: 'row',
+    flexDirection: "row",
   },
   birthday: {
-    flexDirection: 'row',
+    flexDirection: "row",
   },
   dietPrefContainer: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
+    flexDirection: "row",
+    flexWrap: "wrap",
   },
   dietPref: {
-    fontFamily: 'avenir-book',
+    fontFamily: "avenir-book",
     fontSize: 14,
     marginLeft: 4,
     paddingLeft: 2,
@@ -175,15 +175,15 @@ const styles = StyleSheet.create({
     paddingTop: 2,
   },
   nodietPref: {
-    fontFamily: 'avenir-book',
+    fontFamily: "avenir-book",
     fontSize: 14,
     paddingTop: 2,
   },
   list: {
     fontSize: 13,
-    fontFamily: 'avenir-book',
-    backgroundColor: '#659B0E',
-    color: 'white',
+    fontFamily: "avenir-book",
+    backgroundColor: "#659B0E",
+    color: "white",
     margin: 5,
     padding: 8,
     paddingLeft: 9,
@@ -192,11 +192,11 @@ const styles = StyleSheet.create({
   },
 });
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   user: state.user,
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   logoutDispatch: () => dispatch(logout()),
 });
 

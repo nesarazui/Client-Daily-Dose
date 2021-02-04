@@ -8,6 +8,7 @@ import {
   ImageBackground,
   ScrollView,
   Dimensions,
+  TouchableOpacity,
 } from "react-native";
 import { Button, Icon } from "react-native-elements";
 import { Feather } from "@expo/vector-icons";
@@ -395,18 +396,10 @@ class IngredientConfirmation extends React.Component {
                     </View>
                   </View>
                 </View>
-
-                <Button
+                <TouchableOpacity
+                  disabled={this.state.value.length < 1}
                   onPress={this.addIngredient}
-                  title="Add to Ingredients"
-                  color="#659B0E"
-                  titleStyle={{
-                    color: "white",
-                    fontSize: 15,
-                    lineHeight: 15,
-                    fontFamily: "Avenir-Book",
-                  }}
-                  buttonStyle={{
+                  style={{
                     backgroundColor: "#659B0E",
                     borderRadius: 20,
                     height: 35,
@@ -415,21 +408,24 @@ class IngredientConfirmation extends React.Component {
                     alignSelf: "center",
                     margin: 10,
                   }}
-                  disabled={this.state.value.length < 1}
-                />
+                >
+                  <Text
+                    style={{
+                      color: "white",
+                      fontSize: 15,
+                      lineHeight: 15,
+                      fontFamily: "Avenir-Book",
+                    }}
+                  >
+                    Add to Ingredients
+                  </Text>
+                </TouchableOpacity>
               </View>
               <View>
-                <Button
+                <TouchableOpacity
+                  disabled={this.state.name.length < 1}
                   onPress={this.fetchNutrition}
-                  title="All Set! Get Me Nutritional Information"
-                  color="green"
-                  titleStyle={{
-                    color: "white",
-                    fontSize: 15,
-                    lineHeight: 15,
-                    fontFamily: "Avenir-Book",
-                  }}
-                  buttonStyle={{
+                  style={{
                     backgroundColor: "#659B0E",
                     borderRadius: 20,
                     height: 35,
@@ -439,8 +435,18 @@ class IngredientConfirmation extends React.Component {
                     marginTop: 10,
                     marginBottom: 50,
                   }}
-                  disabled={this.state.name.length < 1}
-                />
+                >
+                  <Text
+                    style={{
+                      color: "white",
+                      fontSize: 15,
+                      lineHeight: 15,
+                      fontFamily: "Avenir-Book",
+                    }}
+                  >
+                    All Set! Get Me Nutritional Information
+                  </Text>
+                </TouchableOpacity>
               </View>
             </View>
           </ImageBackground>

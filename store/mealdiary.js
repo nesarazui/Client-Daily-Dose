@@ -7,6 +7,8 @@ const GET_NUTRITION_INFO = "GET_NUTRITION_INFO";
 
 const DEPOSIT_DISH_INFO = "DEPOSIT_DISH_INFO";
 
+const GET_WORKOUT_DEBT = "GET_WORKOUT_DEBT";
+
 //ACTION CREATOR
 const getDishesByDate = (dishes) => {
   return {
@@ -26,6 +28,13 @@ export const depositDishInfo = (dish) => {
   return {
     type: DEPOSIT_DISH_INFO,
     dish,
+  };
+};
+
+const gotWorkoutDebt = (workoutDebt) => {
+  return {
+    type: GET_WORKOUT_DEBT,
+    workoutDebt,
   };
 };
 
@@ -73,6 +82,20 @@ export const removeDish = (id) => {
   };
 };
 
+export const getPreviousDayValues = (incomingDate) => {
+  return async (dispatch) => {
+    try {
+      const yesterday = new Date(incomingDate);
+      yesterday.setDate(incomingDate.getDate() - 1);
+      const { data } = await Axios.get(
+        `http://${DOMAIN_URL}/api/previousDay/${yesterday}`
+      );
+      return await dispatch(gotWorkoutDebt(data));
+    } catch (error) {
+      console.error(error);
+    }
+  };
+};
 //INITIAL STATE
 const initialState = {
   ingreArrayInfo: [],
@@ -82,6 +105,8 @@ const initialState = {
   lunch: [],
   dinner: [],
   snack: [],
+  calorieCount: {},
+  workouts: [],
 };
 
 //REDUCER
@@ -132,6 +157,11 @@ const reducer = (state = initialState, action) => {
       let copystateClone = { ...state };
       copystateClone.dishInfo = action.dish;
       return copystateClone;
+    case GET_WORKOUT_DEBT:
+      let clone = { ...state };
+      clone.calorieCount = action.workoutDebt.calorieCount;
+      clone.workouts = [...action.workoutDebt.workouts];
+      return clone;
     default:
       return state;
   }

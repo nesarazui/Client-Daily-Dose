@@ -1,48 +1,52 @@
-import React from 'react';
-import {
-  StyleSheet,
-  View,
-  TextInput,
-  Text,
-  Picker,
-} from 'react-native';
-import { Formik } from 'formik';
-import {Overlay, Button} from 'react-native-elements'
-import { Feather } from '@expo/vector-icons';
+import React from "react";
+import { StyleSheet, View, TextInput, Text, Picker } from "react-native";
+import { Formik } from "formik";
+import { Overlay, Button } from "react-native-elements";
+import { Feather } from "@expo/vector-icons";
 
-const SaveDish = props => {
+const SaveDish = (props) => {
   let dishNut;
   if (props.dishNut) {
     dishNut = props.dishNut;
   }
   return (
-    <Overlay isVisible={props.isVisible} width={'75%'} height={'20%'} animationType={'fade'} overlayBackgroundColor={'white'}>
+    <Overlay
+      isVisible={props.isVisible}
+      width={"75%"}
+      height={"20%"}
+      animationType={"fade"}
+      overlayBackgroundColor={"white"}
+    >
       <View style={styles.form}>
         <Formik
           initialValues={{
             name: dishNut.name,
-            mealType: '-',
+            mealType: "-",
           }}
-          onSubmit={(values) => (!values.name || values.mealType === '-' ? alert('All Fields Required') : props.onSave(values))}
+          onSubmit={(values) =>
+            !values.name || values.mealType === "-"
+              ? alert("All Fields Required")
+              : props.onSave(values)
+          }
         >
-          {formikProps => (
+          {(formikProps) => (
             <View style={styles.textContainer}>
               <View style={styles.dishContainer}>
-              <Text style={styles.headerText}>Dish Name:</Text>
-              <TextInput
-                style={styles.text}
-                placeholder="Dish Name"
-                onChangeText={formikProps.handleChange('name')}
-                value={formikProps.values.name}
-              />
+                <Text style={styles.headerText}>Dish Name:</Text>
+                <TextInput
+                  style={styles.text}
+                  placeholder="Dish Name"
+                  onChangeText={formikProps.handleChange("name")}
+                  value={formikProps.values.name}
+                />
               </View>
               <View style={styles.mealTypeContainer}>
                 <Text style={styles.headerText}>Meal Type: </Text>
                 <Picker
                   itemStyle={styles.dropdown}
                   selectedValue={formikProps.values.mealType}
-                  onValueChange={itemValue => {
-                    formikProps.setFieldValue('mealType', itemValue);
+                  onValueChange={(itemValue) => {
+                    formikProps.setFieldValue("mealType", itemValue);
                   }}
                 >
                   <Picker.Item label="-" value="-" />
@@ -56,51 +60,51 @@ const SaveDish = props => {
                 </View>
               </View>
               <View style={styles.buttonContainer}>
-              <Button
-                title="Submit"
-                titleStyle={{
-                  color: 'white',
-                  fontSize: 15,
-                  lineHeight: 15,
-                }}
-                buttonStyle={{
-                  backgroundColor: '#659B0E',
-                  opacity: .8,
-                  borderRadius: 20,
-                  height: 35,
-                  width: 75,
-                  justifyContent: 'center',
-                  alignSelf: 'center',
-                  marginTop: 12,
-                  marginRight: 2.5
-                }}
-                onPress={formikProps.handleSubmit}
-              />
-              <Button
-                title="Cancel"
-                titleStyle={{
-                  color: 'white',
-                  fontSize: 15,
-                  lineHeight: 15,
-                }}
-                buttonStyle={{
-                  backgroundColor: '#FF7F4B',
-                  borderRadius: 20,
-                  height: 35,
-                  width: 75,
-                  justifyContent: 'center',
-                  alignSelf: 'center',
-                  marginTop: 12,
-                  marginLeft: 2.5
-                }}
-                onPress={props.handleCancel}
-              />
+                <Button
+                  title="Submit"
+                  titleStyle={{
+                    color: "white",
+                    fontSize: 15,
+                    lineHeight: 15,
+                  }}
+                  buttonStyle={{
+                    backgroundColor: "#659B0E",
+                    opacity: 0.8,
+                    borderRadius: 20,
+                    height: 35,
+                    width: 75,
+                    justifyContent: "center",
+                    alignSelf: "center",
+                    marginTop: 12,
+                    marginRight: 2.5,
+                  }}
+                  onPress={formikProps.handleSubmit}
+                />
+                <Button
+                  title="Cancel"
+                  titleStyle={{
+                    color: "white",
+                    fontSize: 15,
+                    lineHeight: 15,
+                  }}
+                  buttonStyle={{
+                    backgroundColor: "#FF7F4B",
+                    borderRadius: 20,
+                    height: 35,
+                    width: 75,
+                    justifyContent: "center",
+                    alignSelf: "center",
+                    marginTop: 12,
+                    marginLeft: 2.5,
+                  }}
+                  onPress={props.handleCancel}
+                />
               </View>
             </View>
           )}
         </Formik>
       </View>
-      </Overlay>
+    </Overlay>
   );
 };
 
@@ -110,19 +114,19 @@ const styles = StyleSheet.create({
   text: {
     width: 180,
     opacity: 0.8,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: "#FFFFFF",
     padding: 8,
-    alignItems: 'center',
-    borderRadius: 5
+    alignItems: "center",
+    borderRadius: 5,
   },
   headerText: {
-    fontWeight: 'bold',
+    fontWeight: "bold",
     padding: 10,
   },
   container: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#FFFFFF',
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#FFFFFF",
     opacity: 1,
     height: 850,
     width: 350,
@@ -130,42 +134,42 @@ const styles = StyleSheet.create({
     marginTop: 30,
   },
   textContainer: {
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-    height: '100%',
-    width: '100%',
-    backgroundColor: '#E3E3E3',
+    justifyContent: "flex-start",
+    alignItems: "center",
+    height: "100%",
+    width: "100%",
+    backgroundColor: "#E3E3E3",
     borderRadius: 10,
     opacity: 1,
-    flexDirection: 'column'
+    flexDirection: "column",
   },
   dishContainer: {
-    flexDirection: 'row',
-    marginTop: 20
+    flexDirection: "row",
+    marginTop: 20,
   },
   mealTypeContainer: {
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-    width: '95%'
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    alignItems: "center",
+    width: "95%",
   },
   buttonContainer: {
-    flexDirection: 'row'
+    flexDirection: "row",
   },
   icon: {
-    backgroundColor: 'white',
-    opacity: .8,
+    backgroundColor: "white",
+    opacity: 0.8,
     height: 39,
     marginTop: 5,
-    justifyContent: 'center'
+    justifyContent: "center",
   },
   dropdown: {
     height: 39,
     width: 163,
     fontSize: 14,
-    color: 'black',
-    backgroundColor: '#FFFFFF',
+    color: "black",
+    backgroundColor: "#FFFFFF",
     marginTop: 5,
-    opacity: .8
-  }
+    opacity: 0.8,
+  },
 });

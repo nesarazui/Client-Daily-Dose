@@ -27,7 +27,7 @@ function Main(props) {
   React.useEffect(() => {
     async function loadResourcesAndDataAsync() {
       try {
-        SplashScreen.preventAutoHide();
+        // SplashScreen.preventAutoHideAsync();
 
         // Load our initial navigation state
         setInitialNavigationState(await getInitialState());
@@ -48,7 +48,7 @@ function Main(props) {
         console.warn(e);
       } finally {
         setLoadingComplete(true);
-        SplashScreen.hide();
+        SplashScreen.hideAsync();
       }
     }
 
