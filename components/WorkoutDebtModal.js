@@ -11,86 +11,108 @@ const WorkoutDebtModal = (props) => {
       animationType={"fade"}
       overlayBackgroundColor={"white"}
     >
-      <View>
+      {props.workoutDebtInfo.workoutCalculations.totalWorkoutTime === "0.00" ? (
         <View>
-          <Text style={styles.mainHeader}>Next Steps</Text>
+          <Text style={styles.noWorkouts}>
+            No calories to burn for this day
+          </Text>
         </View>
+      ) : (
+        <View>
+          <View>
+            <Text style={styles.mainHeader}>Next Steps</Text>
+          </View>
 
-        <View style={styles.mealContainer}>
-          <View style={styles.headerContainer}>
-            <Text style={styles.headerText}>Yesterday's Caloric Values:</Text>
+          <View style={styles.mealContainer}>
+            <View style={styles.headerContainer}>
+              <Text style={styles.headerText}>Today's Workout Debt:</Text>
+            </View>
+            <View style={styles.wholeDishView}>
+              <Text style={styles.workoutDebtInfo}>
+                Since you ate {props.workoutDebtInfo.calorieCount.fat} fat
+                calories, {props.workoutDebtInfo.calorieCount.protein} protein
+                calories, and {props.workoutDebtInfo.calorieCount.carbs} carbs,
+                your workout effort has increased.
+              </Text>
+              <Text style={styles.workoutDebtInfo}>
+                You can choose to do{" "}
+                {props.workoutDebtInfo.workoutCalculations.totalWorkoutTime}{" "}
+                minutes at{" "}
+                {props.workoutDebtInfo.workoutCalculations.maxHeartRate}% of
+                your estimated max heart rate for any of the following
+                exercises:
+              </Text>
+              <Text style={styles.workoutDebtInfo}>
+                {props.workoutDebtInfo.workoutCalculations.workouts.map(
+                  (workout, index) => {
+                    return (
+                      <View key={index}>
+                        <Text style={styles.workouts}>{workout}</Text>
+                      </View>
+                    );
+                  }
+                )}
+              </Text>
+            </View>
           </View>
-          <View style={styles.wholeDishView}>
-            <View style={styles.individualDishView}>
-              <View style={styles.dishNameContainer}>
-                <View style={styles.dishNameContainer}>
-                  <Text style={styles.dishName}>
-                    {props.calorieCount.calories || 0} General Calories
-                  </Text>
-                </View>
-              </View>
-            </View>
-            <View style={styles.individualDishView}>
-              <View style={styles.dishNameContainer}>
-                <View style={styles.dishNameContainer}>
-                  <Text style={styles.dishName}>
-                    {props.calorieCount.fatKcal || 0} Fat Calories
-                  </Text>
-                </View>
-              </View>
-            </View>
-            <View style={styles.individualDishView}>
-              <View style={styles.dishNameContainer}>
-                <View style={styles.dishNameContainer}>
-                  <Text style={styles.dishName}>
-                    {props.calorieCount.chocdfKcal || 0} CHOCDF Calories
-                  </Text>
-                </View>
-              </View>
-            </View>
-          </View>
-        </View>
 
-        <View style={styles.mealContainer}>
-          <View style={styles.headerContainer}>
-            <Text style={styles.headerText}>Today's Workout Debt:</Text>
-          </View>
-          <View style={styles.wholeDishView}>
-            {props.workouts.map((workout, index) => {
-              return (
-                <View key={index} style={styles.individualDishView}>
+          <View style={styles.mealContainer}>
+            <View style={styles.headerContainer}>
+              <Text style={styles.headerText}>Yesterday's Caloric Values:</Text>
+            </View>
+            <View style={styles.wholeDishView}>
+              <View style={styles.individualDishView}>
+                <View style={styles.dishNameContainer}>
                   <View style={styles.dishNameContainer}>
                     <Text style={styles.dishName}>
-                      {workout.name} for {workout.miles} miles or {workout.min}{" "}
-                      minutes
+                      {props.workoutDebtInfo.calorieCount.fat || 0} Fat Calories
                     </Text>
                   </View>
                 </View>
-              );
-            })}
+              </View>
+              <View style={styles.individualDishView}>
+                <View style={styles.dishNameContainer}>
+                  <View style={styles.dishNameContainer}>
+                    <Text style={styles.dishName}>
+                      {props.workoutDebtInfo.calorieCount.protein || 0} Protein
+                      Calories
+                    </Text>
+                  </View>
+                </View>
+              </View>
+              <View style={styles.individualDishView}>
+                <View style={styles.dishNameContainer}>
+                  <View style={styles.dishNameContainer}>
+                    <Text style={styles.dishName}>
+                      {props.workoutDebtInfo.calorieCount.carbs || 0}{" "}
+                      Carbohydrate Calories
+                    </Text>
+                  </View>
+                </View>
+              </View>
+            </View>
           </View>
         </View>
-
-        <Button
-          title="Cancel"
-          titleStyle={{
-            color: "white",
-            fontSize: 15,
-            lineHeight: 15,
-          }}
-          buttonStyle={{
-            backgroundColor: "#FF7F4B",
-            borderRadius: 20,
-            height: 35,
-            width: 75,
-            justifyContent: "center",
-            alignSelf: "center",
-            marginTop: 12,
-            marginLeft: 2.5,
-          }}
-          onPress={props.handleCancel}
-        />
-      </View>
+      )}
+      <Button
+        title='Cancel'
+        titleStyle={{
+          color: "white",
+          fontSize: 15,
+          lineHeight: 15,
+        }}
+        buttonStyle={{
+          backgroundColor: "#FF7F4B",
+          borderRadius: 20,
+          height: 35,
+          width: 75,
+          justifyContent: "center",
+          alignSelf: "center",
+          marginTop: 12,
+          marginLeft: 2.5,
+        }}
+        onPress={props.handleCancel}
+      />
     </Overlay>
   );
 };
@@ -109,10 +131,7 @@ const styles = StyleSheet.create({
   mealContainer: {
     borderRadius: 10,
     width: 350,
-    //backgroundColor: "#ffffff94",
     backgroundColor: "#faefe8",
-    //opacity: 0.8,
-
     margin: 7,
   },
   headerText: {
@@ -147,8 +166,31 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     padding: 5,
-    color: "#ff7f4b",
+    color: "#659B0E",
     fontFamily: "Avenir-Book",
     fontSize: 17,
+  },
+  workoutDebtInfo: {
+    alignItems: "center",
+    justifyContent: "center",
+    padding: 5,
+    color: "#659B0E",
+    fontFamily: "Avenir-Book",
+    fontSize: 17,
+  },
+  workouts: {
+    alignItems: "center",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    padding: 5,
+    color: "#659B0E",
+    fontFamily: "Avenir-Book",
+    fontSize: 17,
+  },
+  noWorkouts: {
+    alignItems: "center",
+    padding: 50,
+    fontSize: 20,
   },
 });

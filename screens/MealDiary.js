@@ -142,13 +142,13 @@ class MealDiary extends React.Component {
             />
             <View style={styles.calendarButton}>
               <Button
-                icon={<Icon name="calendar" size={50} color="gray" />}
+                icon={<Icon name='calendar' size={50} color='gray' />}
                 buttonStyle={{
                   backgroundColor: "transparent",
                   marginTop: 60,
                   flexDirection: "column",
                 }}
-                title="Select Date"
+                title='Select Date'
                 titleStyle={{
                   color: "black",
                   fontSize: 11,
@@ -192,9 +192,9 @@ class MealDiary extends React.Component {
                               }}
                               icon={
                                 <Feather
-                                  name="x-circle"
+                                  name='x-circle'
                                   size={18}
-                                  color="gray"
+                                  color='gray'
                                 />
                               }
                               buttonStyle={styles.buttonStyle}
@@ -237,9 +237,9 @@ class MealDiary extends React.Component {
                               }}
                               icon={
                                 <Feather
-                                  name="x-circle"
+                                  name='x-circle'
                                   size={18}
-                                  color="gray"
+                                  color='gray'
                                 />
                               }
                               buttonStyle={styles.buttonStyle}
@@ -282,9 +282,9 @@ class MealDiary extends React.Component {
                               }}
                               icon={
                                 <Feather
-                                  name="x-circle"
+                                  name='x-circle'
                                   size={18}
-                                  color="gray"
+                                  color='gray'
                                 />
                               }
                               buttonStyle={styles.buttonStyle}
@@ -327,9 +327,9 @@ class MealDiary extends React.Component {
                               }}
                               icon={
                                 <Feather
-                                  name="x-circle"
+                                  name='x-circle'
                                   size={18}
-                                  color="gray"
+                                  color='gray'
                                 />
                               }
                               buttonStyle={styles.buttonStyle}
@@ -344,10 +344,7 @@ class MealDiary extends React.Component {
             </View>
 
             <View>
-              <WorkoutDebt
-                calorieCount={this.props.calorieCount}
-                workouts={this.props.workouts}
-              />
+              <WorkoutDebt workoutDebtInfo={this.props.workoutDebtInfo} />
             </View>
           </View>
         </View>
@@ -368,7 +365,8 @@ const mapState = (state) => {
     ingrNut: state.nutrition.ingrNut,
     ingredientNames: state.nutrition.ingredientNames,
     calorieCount: state.mealdiary.calorieCount,
-    workouts: state.mealdiary.workouts,
+    workoutCalculations: state.mealdiary.workoutCalculations,
+    workoutDebtInfo: state.mealdiary.workoutDebtInfo,
   };
 };
 

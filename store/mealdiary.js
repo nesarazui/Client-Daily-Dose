@@ -105,8 +105,7 @@ const initialState = {
   lunch: [],
   dinner: [],
   snack: [],
-  calorieCount: {},
-  workouts: [],
+  workoutDebtInfo: { calorieCount: {}, workoutCalculations: { workouts: [] } },
 };
 
 //REDUCER
@@ -159,8 +158,10 @@ const reducer = (state = initialState, action) => {
       return copystateClone;
     case GET_WORKOUT_DEBT:
       let clone = { ...state };
-      clone.calorieCount = action.workoutDebt.calorieCount;
-      clone.workouts = [...action.workoutDebt.workouts];
+      clone.workoutDebtInfo = {
+        ...clone.workoutDebtInfo,
+        ...action.workoutDebt,
+      };
       return clone;
     default:
       return state;

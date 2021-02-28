@@ -31,8 +31,8 @@ class WorkoutDebt extends React.Component {
         <View>
           <Button
             onPress={this.onPress}
-            title="WORKOUT DEBT"
-            color="#659B0E"
+            title='WORKOUT DEBT'
+            color='#659B0E'
             titleStyle={{
               color: "white",
               fontSize: 15,
@@ -51,8 +51,7 @@ class WorkoutDebt extends React.Component {
           <WorkoutDebtModal
             isVisible={this.state.modalOpen}
             handleCancel={this.handleCancel}
-            calorieCount={this.props.calorieCount}
-            workouts={this.props.workouts}
+            workoutDebtInfo={this.props.workoutDebtInfo}
           />
         </View>
       </View>
