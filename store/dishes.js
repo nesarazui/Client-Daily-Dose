@@ -11,6 +11,8 @@ const CONSOLIDATE_DATA = "CONSOLIDATE_DATA";
 
 const CONSOLIDATE_DATA_FROM_MEALDIARY = "CONSOLIDATE_DATA_FROM_MEALDIARY";
 
+const GET_WORKOUT_DEBT_SINGLE_DISH = "GET_WORKOUT_DEBT_SINGLE_DISH";
+
 //ACTION CREATOR
 const addingImageUri = (uri) => {
   return {
@@ -39,6 +41,13 @@ export const consolidatingDataFromMealDiary = (strings) => {
   return {
     type: CONSOLIDATE_DATA_FROM_MEALDIARY,
     strings,
+  };
+};
+
+const gotWorkoutDebtSingleDish = (workoutDebtSingleDish) => {
+  return {
+    type: GET_WORKOUT_DEBT_SINGLE_DISH,
+    workoutDebtSingleDish,
   };
 };
 
@@ -92,12 +101,29 @@ export const createDish = (dishNut, formvalues, ingredientArray) => {
   };
 };
 
+export const fetchWorkoutDebtForSingleDish = (dishNut) => {
+  return async (dispatch) => {
+      try {
+        const calorieData = {fat: dishNut.FAT_KCAL, carbs: dishNut.CHOCDF_KCAL, protein: dishNut.PROCNT_KCAL}
+        const { data } = await axios.post(
+          // 'https://daily-dose-server.herokuapp.com/api/dishes',
+          `http://${DOMAIN_URL}/api/workoutDebt/singleDish`,
+          calorieData
+        );
+        return await dispatch(gotWorkoutDebtSingleDish(data));
+      } catch (error) {
+        console.error(error);
+      }
+    };
+};
+
 //INITIAL STATE
 const initialState = {
   imgUrl: "",
   name: "",
   finalIngredients: [],
   consolidatedData: [],
+  workoutDebtInfoSingleDish: { calorieCount: {}, workoutCalculations: { workouts: [] } }
 };
 
 //REDUCER
@@ -119,6 +145,13 @@ const reducer = (state = initialState, action) => {
       return { ...state, consolidatedData: action.consolidated };
     case CONSOLIDATE_DATA_FROM_MEALDIARY:
       return { ...state, consolidatedData: action.strings };
+    case GET_WORKOUT_DEBT_SINGLE_DISH:
+      let clone = { ...state };
+      clone.workoutDebtInfoSingleDish = {
+        ...clone.workoutDebtInfoSingleDish,
+        ...action.workoutDebtSingleDish,
+      };
+      return clone;  
     default:
       return state;
   }

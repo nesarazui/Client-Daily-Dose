@@ -7,7 +7,9 @@ import CurrentIngredient from "../components/CurrentIngredient";
 import { fetchNutrition, fetchIngredient } from "../store/nutrition";
 import { ingrNameFunc, portionQuantFunc, routes } from "../utilityFunctions";
 import SaveDish from "../components/SaveDish";
-import { createDish } from "../store/dishes";
+import { createDish, fetchWorkoutDebtForSingleDish } from "../store/dishes";
+import WorkoutDebtModal from "../components/WorkoutDebtModal";
+
 
 const initialLayout = { width: Dimensions.get("window").width };
 
@@ -19,6 +21,7 @@ class DishScreen extends React.Component {
       index: 0,
       routes: [{ key: "Dish", title: "Dish" }],
       modalOpen: false,
+      workoutDebtModalOpen: false
     };
     this.renderScene = this.renderScene.bind(this);
     this.renderTabBar = this.renderTabBar.bind(this);
@@ -26,6 +29,7 @@ class DishScreen extends React.Component {
     this.createRoutes = this.createRoutes.bind(this);
     this.onSave = this.onSave.bind(this);
     this.handleCancel = this.handleCancel.bind(this);
+    this.workoutDebtHandleCancel = this.workoutDebtHandleCancel.bind(this)
     this.onPress = this.onPress.bind(this);
   }
 
@@ -63,13 +67,23 @@ class DishScreen extends React.Component {
       modalOpen: false,
     });
     await this.props.createDish(this.props.dishNut, values, this.props.ingrNut);
-    return this.navigation.navigate("Meal Diary");
+    await this.props.fetchWorkoutDebtForSingleDish(this.props.dishNut)
+    this.setState({
+      workoutDebtModalOpen: true,
+    });
   }
 
   handleCancel() {
     this.setState({
       modalOpen: false,
     });
+  }
+
+  workoutDebtHandleCancel() {
+    this.setState({
+      workoutDebtModalOpen: false,
+    });
+    return this.navigation.navigate("Meal Diary");
   }
 
   componentDidMount() {
@@ -94,6 +108,12 @@ class DishScreen extends React.Component {
             onSave={(values) => {
               this.onSave(values);
             }}
+          />
+          <WorkoutDebtModal
+            isVisible={this.state.workoutDebtModalOpen}
+            handleCancel={this.workoutDebtHandleCancel}
+            workoutDebtInfo = {this.props.workoutDebtSingleDishData}
+            isSingleDish={true}
           />
           <CurrentDish
             dishNut={this.props.dishNut}
@@ -163,6 +183,7 @@ const mapStateToProps = (state) => ({
   dishNut: state.nutrition.dishNut,
   ingrNut: state.nutrition.ingrNut,
   ingredientNames: state.nutrition.ingredientNames,
+  workoutDebtSingleDishData: state.dishes.workoutDebtInfoSingleDish
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -173,6 +194,10 @@ const mapDispatchToProps = (dispatch) => ({
   createDish: (dishNut, formValues, ingredientArray) => {
     dispatch(createDish(dishNut, formValues, ingredientArray));
   },
+  fetchWorkoutDebtForSingleDish: (dishNut) => {
+    dispatch(fetchWorkoutDebtForSingleDish(dishNut));
+  }
+
 });
 
 const ConnectedDishScreen = connect(

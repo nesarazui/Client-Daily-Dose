@@ -59,7 +59,6 @@ export default class AnimatedPie extends React.Component {
 
   render() {
     let endAngle = Animated.multiply(this.state.animValue, Math.PI);
-
     return (
       <View>
         <SVG width={220} height={250} viewBox={`-130 -50 250 170`}>
@@ -70,7 +69,7 @@ export default class AnimatedPie extends React.Component {
               return (
                 <AnimatedSlice
                   index={index}
-                  endAngle={endAngle}
+                  endAngle={20}
                   color={item.color}
                   data={this.state.data}
                   key={"pie" + index}

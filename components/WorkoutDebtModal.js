@@ -11,6 +11,7 @@ const WorkoutDebtModal = (props) => {
       animationType={"fade"}
       overlayBackgroundColor={"white"}
     >
+    <View>
       {props.workoutDebtInfo.workoutCalculations.totalWorkoutTime === "0.00" ? (
         <View>
           <Text style={styles.noWorkouts}>
@@ -19,13 +20,9 @@ const WorkoutDebtModal = (props) => {
         </View>
       ) : (
         <View>
-          <View>
-            <Text style={styles.mainHeader}>Next Steps</Text>
-          </View>
-
           <View style={styles.mealContainer}>
             <View style={styles.headerContainer}>
-              <Text style={styles.headerText}>Today's Workout Debt:</Text>
+              <Text style={styles.headerText}>{props.isSingleDish ? `Current Dish's Workout Debt:` : `Today's Workout Debt:`}</Text>
             </View>
             <View style={styles.wholeDishView}>
               <Text style={styles.workoutDebtInfo}>
@@ -58,7 +55,7 @@ const WorkoutDebtModal = (props) => {
 
           <View style={styles.mealContainer}>
             <View style={styles.headerContainer}>
-              <Text style={styles.headerText}>Yesterday's Caloric Values:</Text>
+              <Text style={styles.headerText}>{props.isSingleDish ? `Current Dish's Caloric Values:` : `Yesterday's Caloric Values:`}</Text>
             </View>
             <View style={styles.wholeDishView}>
               <View style={styles.individualDishView}>
@@ -95,7 +92,7 @@ const WorkoutDebtModal = (props) => {
         </View>
       )}
       <Button
-        title='Cancel'
+        title="Ok!"
         titleStyle={{
           color: "white",
           fontSize: 15,
@@ -113,6 +110,7 @@ const WorkoutDebtModal = (props) => {
         }}
         onPress={props.handleCancel}
       />
+      </View>
     </Overlay>
   );
 };

@@ -88,7 +88,7 @@ export const getPreviousDayValues = (incomingDate) => {
       const yesterday = new Date(incomingDate);
       yesterday.setDate(incomingDate.getDate() - 1);
       const { data } = await Axios.get(
-        `http://${DOMAIN_URL}/api/previousDay/${yesterday}`
+        `http://${DOMAIN_URL}/api/workoutDebt/${yesterday}`
       );
       return await dispatch(gotWorkoutDebt(data));
     } catch (error) {
