@@ -1,5 +1,5 @@
 import * as React from "react";
-import { StyleSheet, Text, View, ImageBackground } from "react-native";
+import { StyleSheet, Text, View, ImageBackground, Image } from "react-native";
 import Moment from "moment";
 import { Button } from "react-native-elements";
 import { connect } from "react-redux";
@@ -24,9 +24,10 @@ class HomeScreen extends React.Component {
     return (
       <View style={styles.container}>
         <ImageBackground
-          source={require("../assets/images/fruits-purplegreen.png")}
+          source={require("../assets/images/fit_fast_background.jpg")}
           style={styles.image}
         >
+          <Image source={require("../assets/images/fit_fast_banner.png")} resizeMode={'cover'} style={styles.banner} />
           <View style={styles.userContainer}>
             <Text style={styles.header}>Welcome, {user.name}!</Text>
 
@@ -88,7 +89,7 @@ class HomeScreen extends React.Component {
               <Button
                 title="LOG OUT"
                 onPress={this.handleLogout}
-                color="#659B0E"
+                color="black"
                 titleStyle={{
                   color: "white",
                   fontSize: 15,
@@ -118,13 +119,18 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
   },
+  banner:{ 
+    width: '100%', 
+    height: 75, 
+    position:'absolute', 
+    top: 50 
+  },
   image: {
     flex: 1,
     width: "100%",
     height: "100%",
     justifyContent: "center",
     alignItems: "center",
-    opacity: 0.8,
   },
   userContainer: {
     backgroundColor: "white",
@@ -136,7 +142,7 @@ const styles = StyleSheet.create({
     borderRadius: 30,
   },
   header: {
-    fontFamily: "avenir-book",
+    fontFamily: "cabin",
     fontSize: 30,
     marginTop: 50,
     padding: 5,
@@ -145,10 +151,10 @@ const styles = StyleSheet.create({
   },
   subHeader: {
     fontSize: 18,
-    fontFamily: "avenir-roman",
+    fontFamily: "cabin",
   },
   text: {
-    fontFamily: "avenir-book",
+    fontFamily: "cabin",
     alignSelf: "center",
   },
   textContainer: {
@@ -167,7 +173,7 @@ const styles = StyleSheet.create({
     flexWrap: "wrap",
   },
   dietPref: {
-    fontFamily: "avenir-book",
+    fontFamily: "cabin",
     fontSize: 14,
     marginLeft: 4,
     paddingLeft: 2,
@@ -175,14 +181,14 @@ const styles = StyleSheet.create({
     paddingTop: 2,
   },
   nodietPref: {
-    fontFamily: "avenir-book",
+    fontFamily: "cabin",
     fontSize: 14,
     paddingTop: 2,
   },
   list: {
     fontSize: 13,
-    fontFamily: "avenir-book",
-    backgroundColor: "#659B0E",
+    fontFamily: "cabin",
+    backgroundColor: "black",
     color: "white",
     margin: 5,
     padding: 8,

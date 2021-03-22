@@ -39,7 +39,7 @@ class CurrentDish extends React.Component {
           <Button
             title="Save Dish"
             onPress={this.props.onPress}
-            color="#659B0E"
+            color="black"
             titleStyle={{
               color: 'white',
               fontSize: 15,
@@ -175,7 +175,7 @@ const width = Dimensions.get('window').width;
 const styles = StyleSheet.create({
   head: {
     fontSize: 30,
-    fontFamily: 'avenir-book',
+    fontFamily: "cabin",
     fontWeight: 'bold',
     width: width,
     marginLeft: 7,
@@ -184,7 +184,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 20,
-    fontFamily: 'avenir-book',
+    fontFamily: "cabin",
     marginLeft: 5,
   },
   iconContainer: {
@@ -197,7 +197,7 @@ const styles = StyleSheet.create({
   },
   ingrlist: {
     marginLeft: 5,
-    fontFamily: 'avenir-book',
+    fontFamily: "cabin",
   },
   image: {
     marginTop: 17,
@@ -214,8 +214,8 @@ const styles = StyleSheet.create({
   },
   list: {
     fontSize: 13,
-    fontFamily: 'avenir-book',
-    backgroundColor: '#659B0E',
+    fontFamily: "cabin",
+    backgroundColor: 'black',
     color: 'white',
     margin: 5,
     padding: 8,
@@ -225,7 +225,7 @@ const styles = StyleSheet.create({
   },
   totalTitle: {
     fontSize: 20,
-    fontFamily: 'avenir-book',
+    fontFamily: "cabin",
     marginLeft: 8,
   },
   description: {

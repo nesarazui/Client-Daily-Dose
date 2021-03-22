@@ -6,6 +6,7 @@ import {
   TextInput,
   Picker,
   ImageBackground,
+  Image,
   ScrollView,
   Dimensions,
   TouchableOpacity,
@@ -145,9 +146,10 @@ class IngredientConfirmation extends React.Component {
       <ScrollView style={{ flex: 1 }}>
         <View style={styles.outerContainer}>
           <ImageBackground
-            source={require("../assets/images/fruits-yellowred.png")}
+            source={require("../assets/images/fit_fast_background.jpg")}
             style={styles.image}
           >
+          <Image source={require("../assets/images/fit_fast_banner.png")} resizeMode={'cover'} style={styles.banner} />
             <View style={styles.container}>
               {/* ADD DISH NAME + SUBMIT/CONFIRM INGREDIENTS TO REDIRECT TO DISH SCREEN*/}
               <View style={styles.confirmContainer}>
@@ -181,7 +183,7 @@ class IngredientConfirmation extends React.Component {
                         color: "black",
                         fontSize: 11,
                         lineHeight: 15,
-                        fontFamily: "Avenir-Book",
+                        fontFamily: "cabin",
                       }}
                       buttonStyle={{
                         backgroundColor: "#d6d7da",
@@ -400,7 +402,7 @@ class IngredientConfirmation extends React.Component {
                   disabled={this.state.value.length < 1}
                   onPress={this.addIngredient}
                   style={{
-                    backgroundColor: "#659B0E",
+                    backgroundColor: "black",
                     borderRadius: 20,
                     height: 35,
                     width: 150,
@@ -414,7 +416,8 @@ class IngredientConfirmation extends React.Component {
                       color: "white",
                       fontSize: 15,
                       lineHeight: 15,
-                      fontFamily: "Avenir-Book",
+                      fontFamily: "cabin",
+                      textAlign: 'center'
                     }}
                   >
                     Add to Ingredients
@@ -426,7 +429,7 @@ class IngredientConfirmation extends React.Component {
                   disabled={this.state.name.length < 1}
                   onPress={this.fetchNutrition}
                   style={{
-                    backgroundColor: "#659B0E",
+                    backgroundColor: "black",
                     borderRadius: 20,
                     height: 35,
                     width: 330,
@@ -441,7 +444,8 @@ class IngredientConfirmation extends React.Component {
                       color: "white",
                       fontSize: 15,
                       lineHeight: 15,
-                      fontFamily: "Avenir-Book",
+                      fontFamily: "cabin",
+                      textAlign: 'center'
                     }}
                   >
                     All Set! Get Me Nutritional Information
@@ -483,8 +487,12 @@ const height = Dimensions.get("window").height;
 const width = Dimensions.get("window").width;
 
 const styles = StyleSheet.create({
+  banner:{ 
+    width: '100%', 
+    height: 75, 
+  },
   outerContainer: {
-    backgroundColor: "#FFF81490",
+    backgroundColor: "black",
     height: height,
     width: width,
     alignItems: "center",
@@ -526,7 +534,7 @@ const styles = StyleSheet.create({
     margin: 5,
     paddingHorizontal: 10,
     paddingVertical: 5,
-    fontFamily: "Avenir-Book",
+    fontFamily: "cabin",
     backgroundColor: "white",
   },
   allIngredientContainer: {
@@ -549,20 +557,20 @@ const styles = StyleSheet.create({
     margin: 5,
     paddingHorizontal: 10,
     paddingVertical: 5,
-    fontFamily: "Avenir-Book",
+    fontFamily: "cabin",
   },
   dishView: {
     flexDirection: "row",
     margin: 5,
     paddingHorizontal: 10,
     paddingVertical: 5,
-    fontFamily: "Avenir-Book",
+    fontFamily: "cabin",
   },
   ingredientName: {
     width: 165,
     padding: 3,
     fontSize: 15,
-    fontFamily: "Avenir-Book",
+    fontFamily: "cabin",
   },
   ingredientInput: {
     width: 185,
@@ -570,7 +578,7 @@ const styles = StyleSheet.create({
     borderColor: "#d6d7da",
     padding: 3,
     fontSize: 15,
-    fontFamily: "Avenir-Book",
+    fontFamily: "cabin",
     height: 38.2,
   },
   icon: {
@@ -585,11 +593,11 @@ const styles = StyleSheet.create({
   },
   headerText: {
     color: "white",
-    fontFamily: "Avenir-Book",
+    fontFamily: "cabin",
     fontSize: 18,
   },
   headerTextContainer: {
-    backgroundColor: "#659B0E",
+    backgroundColor: "black",
     opacity: 0.8,
     padding: 10,
     borderTopLeftRadius: 10,

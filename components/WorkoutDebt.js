@@ -32,7 +32,7 @@ class WorkoutDebt extends React.Component {
           <Button
             onPress={this.onPress}
             title='WORKOUT DEBT'
-            color='#659B0E'
+            color='black'
             titleStyle={{
               color: "white",
               fontSize: 15,

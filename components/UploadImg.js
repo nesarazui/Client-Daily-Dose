@@ -62,9 +62,10 @@ class UploadImg extends React.Component {
     return (
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
         <ImageBackground
-          source={require("../assets/images/green.png")}
+          source={require("../assets/images/fit_fast_background.jpg")}
           style={styles.image}
         >
+          <Image source={require("../assets/images/fit_fast_banner.png")} resizeMode={'cover'} style={styles.banner} />
           <View style={styles.container}>
             <Text style={styles.getStartedText}>Upload your dish!</Text>
 
@@ -165,6 +166,12 @@ const mapDispatch = (dispatch) => ({
 export default connect(null, mapDispatch)(UploadImg);
 
 const styles = StyleSheet.create({
+  banner:{ 
+    width: '100%', 
+    height: 75, 
+    position:'absolute', 
+    top: 50 
+  },
   container: {
     backgroundColor: "#ffffff",
     borderRadius: 10,
@@ -187,7 +194,7 @@ const styles = StyleSheet.create({
     color: "black",
     lineHeight: 45,
     textAlign: "center",
-    fontFamily: "Avenir-Book",
+    fontFamily: "cabin",
     fontWeight: "bold",
     backgroundColor: "white",
     opacity: 0.8,
@@ -204,13 +211,13 @@ const styles = StyleSheet.create({
     width: 180,
     height: 60,
     borderRadius: 30,
-    fontFamily: "Avenir-Book",
+    fontFamily: "cabin",
     alignItems: "center",
   },
   buttonText: {
     fontSize: 20,
     color: "#fff",
-    fontFamily: "Avenir-Book",
+    fontFamily: "cabin",
   },
   image: {
     flex: 1,

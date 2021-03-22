@@ -3,6 +3,7 @@ import {
   StyleSheet,
   View,
   ImageBackground,
+  Image,
   Text,
   TextInput,
 } from "react-native";
@@ -32,16 +33,16 @@ class Login extends React.Component {
     return (
       <View style={styles.background}>
         <ImageBackground
-          source={{
-            uri:
-              "https://www.heart.org/-/media/aha/h4gm/article-images/fruit-and-vegetables.jpg",
-          }}
+          source={require('../assets/images/fit_fast_background.jpg')}
           style={styles.image}
         >
+          <View>
+            <Image source={require("../assets/images/fit_fast_logo.png")} style={styles.logo} />
+          </View>
           <View style={styles.loginBox}>
             <View>
               {this.props.error && this.props.error.response ? (
-                <Text style={{ color: "red", fontFamily: "avenir-roman" }}>
+                <Text style={{ color: "red", fontFamily: "cabin" }}>
                   {this.props.error.response.data}
                 </Text>
               ) : null}
@@ -49,7 +50,7 @@ class Login extends React.Component {
 
             <View style={styles.emailContainer}>
               <View style={styles.emailIcon}>
-                <Ionicons name="md-person" size={30} color={"#659B0E"} />
+                <Ionicons name="md-person" size={30} color={"black"} />
               </View>
               <View style={styles.emailTextAndInput}>
                 <Text style={styles.email}>Email</Text>
@@ -64,7 +65,7 @@ class Login extends React.Component {
 
             <View style={styles.passwordContainer}>
               <View style={styles.passwordIcon}>
-                <Ionicons name="ios-lock-closed" size={32} color={"#659B0E"} />
+                <Ionicons name="ios-lock-closed" size={32} color={"black"} />
               </View>
               <View style={styles.emailTextAndInput}>
                 <Text style={styles.email}>Password</Text>
@@ -75,7 +76,7 @@ class Login extends React.Component {
                   onChangeText={(text) => {
                     this.setState({ ...this.state, password: text });
                   }}
-                  iconColor={"#659B0E"}
+                  iconColor={"black"}
                   iconSize={24}
                   label={""}
                 />
@@ -86,14 +87,14 @@ class Login extends React.Component {
               <Button
                 title="Login"
                 onPress={this.handleLogin}
-                color="#659B0E"
+                color="black"
                 titleStyle={{
                   color: "white",
                   fontSize: 18,
                   lineHeight: 20,
                 }}
                 buttonStyle={{
-                  backgroundColor: "#659B0E",
+                  backgroundColor: "black",
                   opacity: 1,
                   borderRadius: 20,
                   height: 40,
@@ -110,7 +111,7 @@ class Login extends React.Component {
                 title="Create an Account"
                 onPress={() => this.props.navigation.push("Signup")}
                 titleStyle={{
-                  color: "#659B0E",
+                  color: "black",
                   fontSize: 15,
                   lineHeight: 20,
                 }}
@@ -135,15 +136,20 @@ class Login extends React.Component {
 const styles = StyleSheet.create({
   background: {
     flex: 1,
-    backgroundColor: "#659B0E",
+    backgroundColor: "black",
     flexDirection: "column",
   },
   image: {
     flex: 1,
     width: "100%",
     height: "100%",
-    justifyContent: "center",
+    justifyContent: 'flex-start',
     alignItems: "center",
+  },
+  logo:{
+    width: 250,
+    height: 250,
+    marginTop: 100
   },
   loginBox: {
     marginTop: 50,
@@ -172,12 +178,12 @@ const styles = StyleSheet.create({
     marginLeft: 20,
   },
   email: {
-    fontFamily: "avenir-book",
+    fontFamily: "cabin",
     marginTop: 10,
   },
   emailInput: {
     width: 250,
-    fontFamily: "avenir-book",
+    fontFamily: "cabin",
     fontSize: 17,
     paddingBottom: 4,
     borderBottomWidth: 0.45,
@@ -197,7 +203,7 @@ const styles = StyleSheet.create({
     marginLeft: 20,
   },
   password: {
-    fontFamily: "avenir-book",
+    fontFamily: "cabin",
     marginLeft: 5,
     marginBottom: 45,
   },
@@ -208,7 +214,7 @@ const styles = StyleSheet.create({
     width: 250,
     fontSize: 17,
 
-    fontFamily: "avenir-book",
+    fontFamily: "cabin",
   },
 });
 

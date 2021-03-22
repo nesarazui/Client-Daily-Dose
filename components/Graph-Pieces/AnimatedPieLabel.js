@@ -52,6 +52,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#E35052',
   },
   label: {
-    fontFamily: 'avenir-book',
+    fontFamily: "cabin",
   },
 });

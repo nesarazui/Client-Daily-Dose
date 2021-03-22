@@ -42,6 +42,7 @@ function Main(props) {
           "avenir-light": require("./assets/fonts/Avenir-Light.ttf"),
           "avenir-book": require("./assets/fonts/Avenir-Book.ttf"),
           "avenir-roman": require("./assets/fonts/Avenir-Roman.ttf"),
+          "cabin": require('./assets/fonts/Cabin/static/Cabin-Regular.ttf')
         });
       } catch (e) {
         // We might want to provide this error information to an error reporting service

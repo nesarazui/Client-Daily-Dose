@@ -19,7 +19,7 @@ export default function BottomTabNavigator({ navigation, route }) {
       initialRouteName={INITIAL_ROUTE_NAME}
       tabBarOptions={{
         inactiveTintColor: "#A9A9A9",
-        activeTintColor: "#659B0E",
+        activeTintColor: "black",
       }}
     >
       <BottomTab.Screen

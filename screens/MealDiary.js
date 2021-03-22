@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View, Dimensions, ScrollView } from "react-native";
+import { StyleSheet, Text, View, Dimensions, ScrollView, Image } from "react-native";
 import { Button } from "react-native-elements";
 //import { ScrollView } from "react-native-gesture-handler";
 import {
@@ -133,6 +133,7 @@ class MealDiary extends React.Component {
       <ScrollView>
         <View>
           <View style={styles.outerContainer}>
+        <Image source={require("../assets/images/fit_fast_banner.png")} resizeMode={'cover'} style={styles.banner} />
             {/* CALENDAR, SUBMIT DATE  */}
             <CalendarModal
               addDate={this.addDate}
@@ -394,6 +395,11 @@ const height = Dimensions.get("window").height;
 const width = Dimensions.get("window").width;
 
 const styles = StyleSheet.create({
+  banner:{ 
+    width: '100%', 
+    height: 75, 
+    top:50
+  },
   outerContainer: {
     backgroundColor: "#ECECEC",
     height: height,
@@ -412,16 +418,16 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
     fontWeight: "bold",
-    backgroundColor: "#659B0E",
+    backgroundColor: "black",
     padding: 5,
     color: "white",
-    fontFamily: "Avenir-Book",
+    fontFamily: "cabin",
   },
   headerText: {
-    backgroundColor: "#659B0E",
+    backgroundColor: "black",
     padding: 5,
     color: "white",
-    fontFamily: "Avenir-Roman",
+    fontFamily: "cabin",
     fontSize: 20,
   },
   wholeDishView: {
@@ -440,8 +446,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     padding: 5,
-    color: "#ff7f4b",
-    fontFamily: "Avenir-Book",
+    color: "black",
+    fontFamily: "cabin",
     fontSize: 17,
   },
   mainHeader: {
@@ -449,7 +455,7 @@ const styles = StyleSheet.create({
     marginTop: 0,
     color: "black",
     fontSize: 24,
-    fontFamily: "Avenir-Book",
+    fontFamily: "cabin",
     justifyContent: "center",
     alignSelf: "center",
   },
@@ -461,8 +467,8 @@ const styles = StyleSheet.create({
   },
   noFoodText: {
     width: 300,
-    color: "black",
-    fontFamily: "Avenir-Book",
+    color: "grey",
+    fontFamily: "cabin",
     fontSize: 15,
   },
 });

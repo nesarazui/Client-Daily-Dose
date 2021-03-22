@@ -4,6 +4,7 @@ import {
   Text,
   TouchableOpacity,
   View,
+  Image,
   ImageBackground,
 } from 'react-native';
 import { Button } from 'react-native-elements';
@@ -19,23 +20,23 @@ export default class FirstScreen extends React.Component {
     return (
       <View style={styles.container}>
         <ImageBackground
-          source={{
-            uri:
-              'https://www.heart.org/-/media/aha/h4gm/article-images/fruit-and-vegetables.jpg',
-          }}
+          source={require('../assets/images/fit_fast_background.jpg')}
           style={styles.image}
         >
+          <View>
+            <Image source={require("../assets/images/fit_fast_logo.png")} style={styles.logo} />
+          </View>
           <View style={styles.textandButtonContainers}>
             <View style={styles.textContainer}>
               <Text style={styles.headText}>Welcome to</Text>
-              <Text style={styles.text}>Daily Dose</Text>
+              <Text style={styles.text}>Fit Fast</Text>
             </View>
 
             <View>
               <Button
                 title="LOGIN"
                 onPress={() => this.navigation.push('Login')}
-                color="#659B0E"
+                color="black"
                 titleStyle={{
                   color: 'white',
                   fontSize: 15,
@@ -57,7 +58,7 @@ export default class FirstScreen extends React.Component {
               <Button
                 title="SIGN UP"
                 onPress={() => this.navigation.push('Signup')}
-                color="#659B0E"
+                color="black"
                 titleStyle={{
                   color: 'white',
                   fontSize: 15,
@@ -88,11 +89,16 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     flexDirection: 'column',
   },
+  logo:{
+    width: 250,
+    height: 250,
+    marginTop: 100
+  },
   image: {
     flex: 1,
     width: '100%',
     height: '100%',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     alignItems: 'center',
     opacity: 0.8
   },
@@ -118,13 +124,13 @@ const styles = StyleSheet.create({
   headText: {
     fontSize: 25,
     color: '#3E3D3F',
-    fontFamily: 'avenir-book',
+    fontFamily: "cabin",
   },
   text: {
     marginTop: -15,
     marginBottom: 5,
     fontSize: 50,
     color: '#3E3D3F',
-    fontFamily: 'avenir-book',
+    fontFamily: "cabin",
   },
 });

@@ -68,7 +68,7 @@ const SaveDish = (props) => {
                     lineHeight: 15,
                   }}
                   buttonStyle={{
-                    backgroundColor: "#659B0E",
+                    backgroundColor: "black",
                     opacity: 0.8,
                     borderRadius: 20,
                     height: 35,

@@ -6,6 +6,7 @@ import {
   TextInput,
   ScrollView,
   ImageBackground,
+  Image
 } from "react-native";
 import { connect } from "react-redux";
 import { Button } from "react-native-elements";
@@ -150,13 +151,11 @@ class Signup extends React.Component {
       <View style={styles.outerContainer}>
         <ScrollView>
           <ImageBackground
-            source={{
-              uri:
-                "https://www.heart.org/-/media/aha/h4gm/article-images/fruit-and-vegetables.jpg",
-            }}
+            source={require('../assets/images/fit_fast_background.jpg')}
             style={styles.image}
           >
             <View style={styles.container}>
+          <Image source={require("../assets/images/fit_fast_banner.png")} resizeMode={'cover'} style={styles.banner} />
               <View style={styles.textContainer}>
                 <Text style={styles.headerText}>Email:</Text>
                 <TextInput
@@ -261,7 +260,7 @@ class Signup extends React.Component {
                             this.setState({ sex: value });
                           }}
                           borderWidth={1}
-                          buttonInnerColor={"#659B0E"}
+                          buttonInnerColor={"black"}
                           buttonOuterColor={"black"}
                           buttonSize={7}
                           buttonOuterSize={17}
@@ -278,7 +277,7 @@ class Signup extends React.Component {
                           labelStyle={{
                             fontSize: 15,
                             color: "black",
-                            fontFamily: "Avenir-Book",
+                            fontFamily: "cabin",
                           }}
                           labelWrapStyle={{}}
                         />
@@ -404,7 +403,7 @@ class Signup extends React.Component {
                       lineHeight: 15,
                     }}
                     buttonStyle={{
-                      backgroundColor: "#659B0E",
+                      backgroundColor: "black",
                       // opacity: .8,
                       borderRadius: 20,
                       height: 35,
@@ -451,7 +450,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#ffffff",
     justifyContent: "center",
     alignItems: "center",
-    height: 900,
   },
   image: {
     flex: 1,
@@ -461,22 +459,26 @@ const styles = StyleSheet.create({
     alignItems: "center",
     opacity: 0.9,
   },
+  banner:{ 
+    width: '100%', 
+    height: 75,
+  },
   container: {
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#FFFFFF90",
     opacity: 1,
-    height: 850,
     width: 350,
     borderRadius: 10,
     marginTop: 25,
+    paddingBottom: 20
   },
   buttonContainer: {
     flexDirection: "row",
   },
   checkboxText: {
     color: "black",
-    fontFamily: "Avenir-Book",
+    fontFamily: "cabin",
   },
   checkboxContainer: {
     flexDirection: "column",
@@ -527,21 +529,21 @@ const styles = StyleSheet.create({
   headerText: {
     fontWeight: "bold",
     padding: 10,
-    fontFamily: "Avenir-Book",
+    fontFamily: "cabin",
   },
   dietaryText: {
     fontWeight: "bold",
     paddingLeft: 10,
     paddingRight: 10,
     marginTop: 20,
-    fontFamily: "Avenir-Book",
+    fontFamily: "cabin",
   },
   prefText: {
     fontWeight: "bold",
     paddingLeft: 10,
     paddingRight: 10,
     marginBottom: 20,
-    fontFamily: "Avenir-Book",
+    fontFamily: "cabin",
   },
   text: {
     width: 203,
@@ -551,7 +553,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderBottomWidth: 0.2,
     borderBottomColor: "gray",
-    fontFamily: "Avenir-Book",
+    fontFamily: "cabin",
   },
   passwordContainer: {
     width: 180,

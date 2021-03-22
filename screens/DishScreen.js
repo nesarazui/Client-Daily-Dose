@@ -1,6 +1,6 @@
 import * as React from "react";
 import { connect } from "react-redux";
-import { StyleSheet, Dimensions, View, Text } from "react-native";
+import { StyleSheet, Dimensions, View, Text, Image } from "react-native";
 import { TabView, TabBar } from "react-native-tab-view";
 import CurrentDish from "../components/CurrentDish";
 import CurrentIngredient from "../components/CurrentIngredient";
@@ -137,7 +137,7 @@ class DishScreen extends React.Component {
     <TabBar
       {...props}
       indicatorStyle={{ backgroundColor: "#E2CA2B" }}
-      style={{ backgroundColor: "#659B0E", fontFamily: "avenir-book" }}
+      style={{ backgroundColor: "black", fontFamily: "cabin" }}
       scrollEnabled={true}
     />
   );
@@ -155,6 +155,8 @@ class DishScreen extends React.Component {
 
   render() {
     return (
+      <View style={styles.container}>
+      <Image source={require("../assets/images/fit_fast_banner.png")} resizeMode={'cover'} style={styles.banner} />
       <TabView
         navigationState={{
           index: this.state.index,
@@ -165,13 +167,22 @@ class DishScreen extends React.Component {
         onIndexChange={this.handleIndexChange}
         initialLayout={initialLayout}
       />
+      </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
+  banner:{ 
+    width: '100%', 
+    height: 75, 
+  },
   scene: {
     flex: 1,
+  },  
+  container: {
+    flex: 1,
+    backgroundColor: "#fff",
   },
 });
 
